@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Receipt of Purchase</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../static/business-casual.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='button_style.css') }}">
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+     <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
+     widgetkey:"dd402bb4940b4cf3a855aaa371d11419", 
+     hidden: true,
+     cookie_transfer_enabled: true,
+     cookie_transfer_proxying: false 
+     };
+     var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();
+     </script>
+
+        <!-- Adding Zopim Live Chat -->
+    <script type="text/javascript">
+    if(!window.__surfly){
+	    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+	    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+	    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+	    $.src="//v2.zopim.com/?40l495kTPWFGA7JFrUDzK03KARqCPsNL";z.t=+new Date;$.
+	    type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+    }
+    </script>
+    <!--End of Zopim Live Chat Script-->
+
+</head>
+
+<body>
+     <div style="text-align:right;">
+      <button class="button" id="exit_button" style="visibility:hidden" onclick="exitSession()">Exit session</button>
+    </div>
+    <!--
+    <a href="{{ url_for('index') }}">
+       <div class="brand"><img class="img-logo" src="../static/logo4.png"/> Fantasy Bakes</div>
+    </a>
+    -->
+    <div class="brand">  <img class="img-logo" src="../static/logo4.png"/> Fantasy Bakes</div>
+    <div class="address-bar">123 A Street | Some City, XY 12345 | 890.567.1234</div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ url_for('receipt') }}">Receipt</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('index') }}">Home</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+
+
+     <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Review
+                        <strong>your order</strong>
+                    </h2>
+                     <hr>
+                        <img class="img-responsive img-border img-left" src="../static/lemon.jpg" alt="">
+                     <hr class="visible-xs">
+			<p> Here is an overview of the order you just placed: </p>
+			<p> Your name: </p> <div id="order_name" class="info"></div>
+			<br>
+			<p> Your email: </p> <div id="order_email" class="info"></div>
+			<br>
+			<p> Your address: </p> <div id="order_address" class="info"></div>
+			<br>
+			<p> We will send you an email as soon as your cake is ready. </p>
+		     	<script>
+			var cookie = document.cookie;
+			var index_order = cookie.indexOf("order");
+			cookie = cookie.substring(index_order, cookie.length);
+			cookie = cookie.substring(7, cookie.indexOf(";"));
+			var info = cookie.split(",");
+			if(sessionStorage.getItem("order_info_complete")=="true"||sessionStorage.getItem("order_info_complete")==null){
+				document.getElementById("order_name").innerHTML = info[0].substring(info[0].indexOf('=')+1, info[0].length);
+				document.getElementById("order_email").innerHTML = info[1].substring(info[1].indexOf('=')+1, info[1].length);
+				document.getElementById("order_address").innerHTML = info[2].substring(info[2].indexOf('=')+1, info[2].length);
+			}
+		     	</script>
+                     
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+   <script>
+   if(window.__surfly){
+	document.getElementById('exit_button').style.visibility="visible";
+   } else {
+	document.getElementById('exit_button').style.visibility="hidden";
+   }
+   </script>
+
+   <script type="text/javascript">
+    // end session
+    function exitSession(){
+	var request_end = new XMLHttpRequest();
+	request_end.open('DELETE', 'https://api.surfly.com/v2/sessions/'+sessionStorage.getItem("session_id")+'/?api_key=33c092b9d4d6425e817f5140447e43da');
+	request_end.onreadystatechange = function () {
+  		if (this.readyState === 4) {
+			var body = this.responseText;
+			var index = body.indexOf("response");
+			var success = body.substring(index+11, body.length-2);
+			if(success==="Session has been ended successfully"){			
+				Surfly.endSession('https://polite-parliment-37403.herokuapp.com/');
+			}
+ 		}
+	};
+	request_end.send();
+  }
+  </script>
+
+    <!-- jQuery -->
+    <script src="../static/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/bootstrap.min.js"></script>
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+
+
+</body>
+
+</html>
+    
+

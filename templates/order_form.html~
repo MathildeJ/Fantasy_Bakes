@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='form_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='additional_form_style.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='button_style.css') }}">
+
+    <title>Cake order</title>
+    <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
+    widgetkey:"dd402bb4940b4cf3a855aaa371d11419",
+    hidden: true,
+    cookie_transfer_enabled: true,
+    cookie_transfer_proxying: false
+    };
+    var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();
+    </script>
+
+     <!-- Adding Zopim Live Chat -->
+    <script type="text/javascript">
+	if(!window.__surfly){
+	    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+	    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+	    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+	    $.src="//v2.zopim.com/?40l495kTPWFGA7JFrUDzK03KARqCPsNL";z.t=+new Date;$.
+	    type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+	}
+    </script>
+    <!--End of Zopim Live Chat Script-->
+  </head>
+
+  <body class="body-style">
+         <a href="{{ url_for('index') }}">
+         <img class="img-logo" src="../static/logo4.png"/>
+         </a>
+	 
+	 <div style="text-align:right;">
+          <button class="button" id="exit_button" style="visibility:hidden" onclick="exitSession()">Exit session</button>
+        </div>
+
+	 <form id="order" class="dark-matter">
+
+	    <h1 class="text-title">Fantasy Bakes Order Form 
+		<span>Please fill all the text fields</span>
+	    </h1>
+	    <label>
+		<span>Full name :</span>
+		<input id="name" type="text" name="name" />
+	    </label>
+	    
+	    <label>
+		<span>Email address :</span>
+		<input id="email" type="email" name="email"/>
+	    </label>
+	    
+	    <label>
+		<span>Address:</span>
+		<textarea id="address" name="address"> </textarea>
+	    </label> 
+            <label>
+		  <div class="form-row">
+    		    <label>
+		      <span>Card Number</span>
+		      <input type="text" size="20" data-stripe="number" surfly_private>
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>Expiration (MM/YY)</span>
+		      <input type="text" size="5" surfly_private>
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>CVC</span>
+		      <input type="text" size="4" data-stripe="cvc" surfly_private>
+		    </label>
+		  </div>
+	    </label>   
+	     <label>
+		<span>&nbsp;</span> 
+		<input type="button" class="button" onclick=logSale() style="background-color: #87cefa;" value="Log sale" /> 
+	    </label>    
+            <label>
+               <span>&nbsp;</span>
+               <input type="button" class="button" id="order_button" style="cursor:pointer;" onclick=thankYou() style="background-color: #87cefa;" value="Order" /> 
+            </label>
+	</form>
+       
+          <script type="text/javascript">
+           function thankYou() {
+	      document.getElementById("order").submit();
+	      var get_name = document.getElementById("name").value;
+	      var get_email = document.getElementById("email").value;
+	      var get_address = document.getElementById("address").value;	
+	      if(get_name!=="" && get_email!=="" && get_address!==""){
+			sessionStorage.setItem("order_info_complete", "true");
+	      } else {
+			sessionStorage.setItem("order_info_complete", "false");
+	      }
+	      document.cookie = 'order: name='+get_name+', email='+get_email+', address='+get_address;
+              window.location.href = '/thank_you';
+           }
+        </script>
+
+         
+	<script type="text/javascript">
+	// when the leader is in control then the 'buy' button is clickable otherwise, it is disabled
+	window.addEventListener('surflycontrolchange', function (event) {
+	    var element = document.getElementById("order_button");
+	    if (event.leaderHasControl) {
+		element.disabled = false;
+	    } else {
+		element.disabled = true;
+	    }
+	});
+	</script>
+
+           <script>
+	   if(window.__surfly){
+		document.getElementById('exit_button').style.visibility="visible";
+	   } else {
+		document.getElementById('exit_button').style.visibility="hidden";
+	   }
+	   </script>
+
+	   <script type="text/javascript">
+	    // end session
+	    function exitSession(){
+		var request_end = new XMLHttpRequest();
+		request_end.open('DELETE', 'https://api.surfly.com/v2/sessions/'+sessionStorage.getItem("session_id")+'/?api_key=ec006650588b4726ac397ab5e56c033a');
+		request_end.onreadystatechange = function () {
+	  		if (this.readyState === 4) {
+				var body = this.responseText;
+				var index = body.indexOf("response");
+				var success = body.substring(index+11, body.length-2);
+				console.log(success);
+				if(success==="Session has been ended successfully"){				
+					Surfly.endSession('https://polite-parliment-37403.herokuapp.com/');
+				}
+	 		}
+		};
+		request_end.send();
+	  }
+	  </script>
+
+
+        <script type="text/javascript">
+           function logSale(){
+           Surfly.log("Sales complete");
+           }
+         </script>
+
+
+     <script type="text/javascript">
+      var request_logs = new XMLHttpRequest();
+      request_logs.open('GET', 'https://api.surfly.com/v2/logs/?api_key=33c092b9d4d6425e817f5140447e43da');
+      var agents = [];// array containing agents who've made a sale
+      var count = [];// array storing the number of sales for each agent
+      var csv_array = []; // array to store the agents and count
+      request_logs.onreadystatechange = function () {
+        if (this.readyState === 4) {
+                var str_logs = this.responseText;// get the logs
+                console.log("the logs are " + this.response.Text);
+                var array_logs = str_logs.split('{'); //split the logs  
+        
+          // we go through all the logs and for each of them, we check what's in the "details" section
+          for(var i =0; i<array_logs.length;i++){
+                  var element = array_logs[i]; 
+                  var index = element.indexOf("details");
+                  var details = element.substring(index+10, element.length-3);
+                  details = details.replace('\/"',"");
+                  console.log("the details are " + details);
+                  // if we are in a Surfly session and the details are "Sales complete" (log sent when a sale is made) then we get the agent's id
+                  if(window.__surfly){
+                          if(details=="Sales complete"){
+                                  var index_ag = element.indexOf("agent_id");
+                                  var index_created = element.indexOf("created");
+                                  var id = element.substring(index_ag+11, index_created-2);
+                                  // if the agent's id is not in the array then we add it with a sales count of 1
+                                  if(agents.indexOf(id)===-1){
+                                          agents.push(id);
+                                          count.push(1);
+                                  // otherwise, we increment by 1 the number of sales made by the agent
+                                  }else{
+                                         for(var j=0; j<agents.length;j++){
+                                                  if(agents[j]===id){
+                                                          count[j]+=1;
+                                          }
+                                  }
+                          }
+                  }
+          }
+      }
+     // we push the agents and the count values to the csv array and join them with a ',' to create a csv format
+        console.log("the agent is " + agents);
+        console.log("the count is " + count);
+        csv_array.push(agents);
+        csv_array.push(count);
+        //window.alert(csv_array.join(","));
+        var new_csv_array = csv_array.join(",");
+        console.log("the new csv array is " + new_csv_array);
+        sessionStorage.setItem('retrieveCsv', new_csv_array);
+    }
+  }; 
+  request_logs.send();
+</script>
+
+<script type="text/javascript">
+console.log("in the store is " + sessionStorage.getItem('retrieveCsv'))
+
+  function downloadCSV(args) {
+  var csv = sessionStorage.getItem('retrieveCsv')
+        console.log("this is the csv file " + csv);
+        if (csv == null) return;
+
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)){
+           csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data =  encodeURI(csv);
+        console.log("the data is: " + data);
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+      }
+
+</script>
+
+  </body>
+</html>
