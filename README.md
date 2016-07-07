@@ -1,36 +1,17 @@
-# cake shop
+# Blog post draft
 
-#### Pages
+We designed and created an example meant to explain how Surfly can be integrated into your own website and most importantly to show the different customisation possibilities it provides.
+If you are thinking about using Surfly or are a new user, you can follow this step by step example to understand how Surfly can be used.
+In particular, we decided to highlight the main features that we offer and show you how you can male Surfly as visible or invinsible as you wish depending on your needs and preferences.
 
-- the index (link to Surfly session) fake links to themed cakes and designs (wedding/ birthday/ anniversary/ english high tea, an order button (to the form), ask for assistance (surfly)) 
-  - zoopim will be added here
-- landing page (start session) -> it is a popup with session id and text
-- form (during session) payment details
-- thankyou for ordering page 
-- -> then, at the end of sessionpopup with survey inside 
-- reciept
-- login page?
-
-#### Characters:
-
-- the confused customer *Mrs Rose Frosting*
-- the agent *Miss Cherry Flour*
-
-#### Shop Name and theme
-
-Colours: 
-  - light blue 
-
-Name: 
+#### First step: our website
+We decided to build an example website to illustrate the changes that can be made and the variety of ways in which Surfly can be integrated into a website. We chose to design a website for a cake shop which makes personalized cakes and put emphasis on helping their clients and guiding them through the website.
+Here are a few screenshots of the website before we integrate Surfly:
 
 
-Slogan: *baking dreams come true*
 
-parody the disney logo in cake?! (castle as a cake)
+As you can see, it it a standard website with different pages and possible actions. We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
 
-Initially the developers are setting up the index page for their cake shop. They are a specialist cake shop and make the cake for the customer -> they make the fantasy cakes of their customers come true. Comunication is very important, and so they want co-browsing funcionality to show the different options, guide, and to offer greater support to clients. They decide to integrate Surfly: 
-
-*add inbound/ outbound information?*
 
 #### The story flow 
 
