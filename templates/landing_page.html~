@@ -56,12 +56,6 @@
   	</div>
 	
 	<script>
-        var timer = setTimeout(function() {
-            window.location.href='/'
-        }, 3000);
-    	</script>
-
-	<script>
 	function redirect(){
 		window.location.href = '/';
 	}		

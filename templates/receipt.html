@@ -27,39 +27,10 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-     <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
-     widgetkey:"dd402bb4940b4cf3a855aaa371d11419", 
-     hidden: true,
-     ui_off: true,
-     cookie_transfer_enabled: true,
-     cookie_transfer_proxying: false 
-     };
-     var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();
-     </script>
-
-        <!-- Adding Zopim Live Chat -->
-    <script type="text/javascript">
-    if(!window.__surfly){
-	    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-	    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-	    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-	    $.src="//v2.zopim.com/?40l495kTPWFGA7JFrUDzK03KARqCPsNL";z.t=+new Date;$.
-	    type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
-    }
-    </script>
-    <!--End of Zopim Live Chat Script-->
-
+ 
 </head>
 
 <body>
-     <div style="text-align:right;">
-      <button class="button" id="exit_button" style="visibility:hidden" onclick="exitSession()">Exit session</button>
-    </div>
-    <!--
-    <a href="{{ url_for('index') }}">
-       <div class="brand"><img class="img-logo" src="../static/logo4.png"/> Fantasy Bakes</div>
-    </a>
-    -->
     <div class="brand">  <img class="img-logo" src="../static/logo4.png"/> Fantasy Bakes</div>
     <div class="address-bar">123 A Street | Some City, XY 12345 | 890.567.1234</div>
 
@@ -111,52 +82,12 @@
 			<br>
 			<p> Your address: </p> <div id="order_address" class="info"></div>
 			<br>
-			<p> We will send you an email as soon as your cake is ready. </p>
-		     	<script>
-			var cookie = document.cookie;
-			var index_order = cookie.indexOf("order");
-			cookie = cookie.substring(index_order, cookie.length);
-			cookie = cookie.substring(7, cookie.indexOf(";"));
-			var info = cookie.split(",");
-			if(sessionStorage.getItem("order_info_complete")=="true"||sessionStorage.getItem("order_info_complete")==null){
-				document.getElementById("order_name").innerHTML = info[0].substring(info[0].indexOf('=')+1, info[0].length);
-				document.getElementById("order_email").innerHTML = info[1].substring(info[1].indexOf('=')+1, info[1].length);
-				document.getElementById("order_address").innerHTML = info[2].substring(info[2].indexOf('=')+1, info[2].length);
-			}
-		     	</script>
-                     
+			<p> We will send you an email as soon as your cake is ready. </p>                     
                 </div>
             </div>
         </div>
 
     </div>
-
-   <script>
-   if(window.__surfly){
-	document.getElementById('exit_button').style.visibility="visible";
-   } else {
-	document.getElementById('exit_button').style.visibility="hidden";
-   }
-   </script>
-
-   <script type="text/javascript">
-    // end session
-    function exitSession(){
-	var request_end = new XMLHttpRequest();
-	request_end.open('DELETE', 'https://api.surfly.com/v2/sessions/'+sessionStorage.getItem("session_id")+'/?api_key=33c092b9d4d6425e817f5140447e43da');
-	request_end.onreadystatechange = function () {
-  		if (this.readyState === 4) {
-			var body = this.responseText;
-			var index = body.indexOf("response");
-			var success = body.substring(index+11, body.length-2);
-			if(success==="Session has been ended successfully"){			
-				Surfly.endSession('https://polite-parliment-37403.herokuapp.com/');
-			}
- 		}
-	};
-	request_end.send();
-  }
-  </script>
 
     <!-- jQuery -->
     <script src="../static/jquery.js"></script>

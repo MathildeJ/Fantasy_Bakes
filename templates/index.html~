@@ -208,7 +208,7 @@
     </div>
 
    <script>
-   // make the button visible/hidden depending on whether or not we're already in a session
+   // make the elements visible/hidden depending on whether or not we're already in a session
    if(window.__surfly){
 	document.getElementById('exit_button').style.visibility="visible";
 	document.getElementById('get_help').style.visibility="hidden";
