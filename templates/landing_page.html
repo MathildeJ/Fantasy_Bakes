@@ -52,7 +52,7 @@
 		    var body = this.responseText; 
 		    // we extract the queue_id from the string we get from the request
 		    var index = body.indexOf("queue_id");
-		    var id = body.substring(index+10, body.length-2);
+		    var id = body.substring(index+10, index+14);			
 		    // we display this id on the button
 		    document.getElementById("id_button").innerHTML=id;
 	    }
