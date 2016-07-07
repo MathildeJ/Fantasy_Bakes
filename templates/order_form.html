@@ -62,10 +62,22 @@
             </label>
 	</form>
        
-          <script type="text/javascript">
+        <script type="text/javascript">
            function thankYou() {
               window.location.href = '/thank_you';
            }
         </script>
+
+	<script>
+	// when the leader is in control then the 'buy' button is clickable otherwise, it is disabled
+	window.addEventListener('surflycontrolchange', function (event) {
+	    var element = document.getElementById("order_button");
+	    if (event.leaderHasControl) {
+		element.disabled = false;
+	    } else {
+		element.disabled = true;
+	    }
+	});
+	</script>
   </body>
 </html>
