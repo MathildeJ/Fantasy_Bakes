@@ -9,8 +9,7 @@ We decided to build an example website to illustrate the changes that can be mad
 Here are a few screenshots of the website before we integrate Surfly:
 
 
-
-As you can see, it it a standard website with different pages and possible actions. We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
+As you can see, it is a standard website with different pages and possible actions. We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
 
 
 #### Integrate Surfly 
@@ -30,20 +29,21 @@ You should also specify the domain name of your website so that you can accept r
 
 As you can see below, a red button appeared and allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
 
+
 #### Widget options
 We are now able to start co-browsing sessions but the overall design doesn't really suit our website. Indeed, the bright red theme color of Surfly stands out and we would prefer to use our own theme color. This can be easily achieved by setting a few options in the widget we previously added.
 In our case, we simply used a few custom options:
 ```
- drawing_mode: "permanent", // change drawing mode so that the drawings last
-	chat_box_color: "#87cefa", // change color of chat box so that it suits our website's theme
-	theme_font_background: "#87cefa", // change color of button 
-	videochat: false // remove videochat feature (not needed)
-	
+drawing_mode: "permanent", // change drawing mode so that the drawings last
+chat_box_color: "#87cefa", // change color of chat box so that it suits our website's theme
+theme_font_background: "#87cefa", // change color of button 
+videochat: false // remove videochat feature (not needed)
 ```
 On the image below, you can now see that the button and the chat box are in our website's theme color. We also chose to disable the video chat feature that is included by default because we have no use for it. Finally, we decided to make the drawings permanent to facilitate communication.
 You can find an extensive list of widget options [here](https://www.surfly.com/cobrowsing-api/).
 
-#### Creating your own button
+
+#### Create your own button
 Even though Surfly is now customised to our needs and preferences, we would like to create our own button to start a co-browsing session so that we can customise it and control its behaviour more easily.
 First, we have to hide the default button since we will use our own. To do so, we simply set the 'hidden' option to 'true':
 ```
@@ -60,32 +60,125 @@ You might have noticed that when a visitor wishes to start a session they are pu
 
 In order to use such a page, we first need to remove the red banner blocking the session:
 ```
-block_until_agent_joins: false,n // remove red banner
+block_until_agent_joins: false, // remove red banner
+```
+Once this is done, we have to move the snippet code to our landing page (since it will be the page from which sessions start) and to add the auto start option so that a session will start automatically as soon as the button is clicked:
+```
+auto_start: true, // session will start automatically
+```
+We already have our own button which starts a Surfly session from the landing page so we simply need to remove the #surflystart anchor and add an onclick function which redirects the user to our new landing page:
+```
+<button class="button" id="get_help_button" onclick="landing()"></button>
+
+<script>
+    // the get help button redirects the user to the landing page (if they're not already in a session)
+    function landing(){
+	if(!window.__surfly){
+		window.location.href = '/landing_page';
+	}
+    }
+</script>
+```
+Finally, we need to display the Queue ID on the landing page when a session starts so that the customer is aware that they are in the queue and, in some cases, so that they can communicate it to an agent they were already in contact with (over the phone for example). To do this, we use the REST API to get some information about the session (more information on how to use the REST API can be found [here](https://www.surfly.com/cobrowsing-api/)):
+```
+<script>
+ 	// using the REST API to get information about the session
+	var request = new XMLHttpRequest();
+
+	request.open('GET', 'https://api.surfly.com/v2/sessions/?api_key=**your api key**&active_session=true');
+
+	request.onreadystatechange = function () {
+	  if (this.readyState === 4) {
+	    if(window.__surfly){
+		    var body = this.responseText; 
+		    // we extract the queue_id from the string we get from the request
+		    var index = body.indexOf("queue_id");
+		    var id = body.substring(index+10, index+14);
+		    // we display this id on the button
+		    document.getElementById("id_button").innerHTML=id;
+	    }
+	  }
+	};
+
+	request.send();
+</script>
 ```
 
 
-Third step 
- - remove the red banner **fith commit**
- - create landing page with own popup window (cake and name of cake shop, give a session id - if on the phone to the agent please pass this over to them now, otherwise please wait for an agent to join your session - automatically close popup when follower joins?) **sixth commit**
+As you can see above, we now have our own personalised landing page to greet our customers.
+
 
 #### Session behaviour
+We have already managed to integrate Surfly in a way that suit our needs but there are other use cases that we still haven't covered. In particular, when a client places an order while they are in a session, we do not want the agent to be able to see their payment details or to click the 'Order' button for them if they are in control of the session. 
+This can be easily achieved by using some of the built-in options provided with Surfly.
 
-Then we decide, we are happy with the integration, and want to test it, so enter Mrs flour and Mrs Frosting. Mrs Frosting starts a session, and then Mrs Flour joins. During the session, the developers notice a few things they want to change when Mrs Frosting placed her order. 
+To enable field masking (the follower will not see the leader's input), we can simply add the 'surfly_private' attribute to fields containing sensitive information:
+```
+<span>Card Number</span>
+<input type="text" size="20" data-stripe="number" surfly_private>
+```
+In our example, we will use this option on the three last fields of our order form as they contain information about the client's card.
 
-Fourth step (ordering a cake in the session)
- - show a form -> the agent can see payment details - enable field masking **seventh commit** 
- - disable the buy button **eigth commit**
 
-Then they want feedback from the session, so they add a popup window, and Mrs Frosting fills this in, 
-explain the changes to the widget. 
+As for the 'Order' button, we can easily add an eventListener in order to catch the 'surflycontrolchange' event which is fired every time the control is switched within a Surfly session. Then, we check whether or not the leader is in control and disable the order button if they are not.
+```
+<script>
+// when the leader is in control then the 'buy' button is clickable otherwise, it is disabled
+window.addEventListener('surflycontrolchange', function (event) {
+    var element = document.getElementById("order_button");
+    if (event.leaderHasControl) {
+        element.disabled = false;
+    } else {
+        element.disabled = true;
+    }
+});
+</script>
+```
 
-Fith step 
- - show a popup and form at the end for feedback (and then show the results on another page) **ninth commit**
 
-Finally, we retrieve Mrs Frostings order after the popup has closed. 
- 
-Sixth step
- - we want to show a reciept at the end -> use session continuation **tenth commit**
+#### Ask for feedback
+Since customer service is very important to us, we also would like to be able to ask for feedback at the end of a session so that we can improve our website and offer the smoothest co-browsing experience to our clients.
+We have already created a survey page so we only needed to use the 'end_of_session_popup_url' option:
+```
+end_of_session_popup_url: "https://example.com/survey",
+```
+Please note: you might need to set the 'hidden' option to 'false' for this option to work correctly
+
+
+
+
+#### Receipt
+Finally, we would also like to be able to show a receipt of the order a customer has placed. Therefore, we have to make sure that this information will be passed on even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
+
+The first thing we need to do is add the snippet code to all the pages we wish to transfer cookies from. We also have to set two cookies options to ensure session continuation:
+```
+<script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
+widgetkey:"**your api key**",
+hidden: true,
+cookie_transfer_enabled: true,
+cookie_transfer_proxying: false
+};
+var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();</script>
+```
+After that, we need to set the cookies when we submit the form. In our example, we chose to only store the name, email and address of the client:
+```
+document.getElementById("order").submit();
+var get_name = document.getElementById("name").value;
+var get_email = document.getElementById("email").value;
+var get_address = document.getElementById("address").value;
+document.cookie = 'order: name='+get_name+',email='+get_email+',address='+get_address;
+```
+Finally, we have to get the cookies and display the retrieved data (parsed according to the syntax previously used when we set the cookies):
+```
+var cookie = document.cookie;
+var index_order = cookie.indexOf("order");
+cookie = cookie.substring(index_order, cookie.length);
+cookie = cookie.substring(7, cookie.indexOf(";"));
+var info = cookie.split(",");
+```
+
+
+
 
 #### Advanced options
 
