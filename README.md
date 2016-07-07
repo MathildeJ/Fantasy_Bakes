@@ -14,7 +14,7 @@ As you can see, it it a standard website with different pages and possible actio
 
 
 #### Second step: adding Surfly 
-First of all, we have to add Surfly to our website. This is easily achieve by logging in to your surfly.com account and navigating to the 'Settings' panel. You can then find the snippet code that you need to put into the source code of your website in the 'Integration' tab.
+First of all, we have to add Surfly to our website. This is easily achieve by logging in to your surfly.com account and navigating to the 'Settings' panel. You can then find the snippet code that you need to copy and paste into the source code of your website in the 'Integration' tab.
 It should look something like the following:
 ```
 <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
@@ -28,11 +28,23 @@ var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src
 
 You should also specify the domain name of your website so that you can accept requests made from it.
 
-As you can see below, a red button appeared and allows us to start a session. Surfly works straight away and we can instantly start a session and receive calls without any further configuration required. 
+As you can see below, a red button appeared and allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
 
 #### Third step: widget options
-We are now able to start co-browsing sessions but the 
+We are now able to start co-browsing sessions but the overall design doesn't really suit our website. Indeed, the bright red theme color of Surfly stands out and we would prefer to use our own theme color. This can be easily achieved by setting a few options in the widget we previously added.
+In our case, we simply used a few custom options:
+```
+ drawing_mode: "permanent", // change drawing mode so that the drawings last
+	chat_box_color: "#87cefa", // change color of chat box so that it suits our website's theme
+	theme_font_background: "#87cefa", // change color of button 
+	videochat: false // remove videochat feature (not needed)
+	
+```
+On the image below, you can now see that the button and the chat box are in our website's theme color. We also chose to disable the video chat feature that is included by default because we have no use for it. Finally, we decided to make the drawings permanent to facilitate communication.
+You can find an extensive list of widget options here(https://www.surfly.com/cobrowsing-api/).
 
+#### Fourth step: creating your own button
+Even though Surfly is now customised to our needs and preferences, we would like to create our own button to start a co-browsing session so that we can customise it and control its behaviour more easily.
 
 It doesnt sit as well on the website as they wanted so they experiment with the colors and options
 They then decide to remove the button entirley and have people use a cake instead
