@@ -38,28 +38,24 @@
 		  <div class="form-row">
     		    <label>
 		      <span>Card Number</span>
-		      <input type="text" size="20" data-stripe="number">
+		      <input type="text" size="20" data-stripe="number" surfly_private>
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span>Expiration (MM/YY)</span>
-		      <input type="text" size="5">
+		      <input type="text" size="5" surfly_private>
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span>CVC</span>
-		      <input type="text" size="4" data-stripe="cvc">
+		      <input type="text" size="4" data-stripe="cvc" surfly_private>
 		    </label>
 		  </div>
-	    </label>   
-	     <label>
-		<span>&nbsp;</span> 
-		<input type="button" class="button" onclick=logSale() style="background-color: #87cefa;" value="Log sale" /> 
-	    </label>    
+	    </label>      
             <label>
                <span>&nbsp;</span>
                <input type="button" class="button" id="order_button" style="cursor:pointer;" onclick=thankYou() style="background-color: #87cefa;" value="Order" /> 
