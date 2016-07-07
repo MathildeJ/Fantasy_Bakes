@@ -1,43 +1,51 @@
-# cake shop
+# Blog post draft
 
-#### Pages
+We designed and created an example meant to explain how Surfly can be integrated into your own website and most importantly to show the different customisation possibilities it provides.
+If you are thinking about using Surfly or are a new user, you can follow this step by step example to understand how Surfly can be used.
+In particular, we decided to highlight the main features that we offer and show you how you can male Surfly as visible or invinsible as you wish depending on your needs and preferences.
 
-- the index (link to Surfly session) fake links to themed cakes and designs (wedding/ birthday/ anniversary/ english high tea, an order button (to the form), ask for assistance (surfly)) 
-  - zoopim will be added here
-- landing page (start session) -> it is a popup with session id and text
-- form (during session) payment details
-- thankyou for ordering page 
-- -> then, at the end of sessionpopup with survey inside 
-- reciept
-- login page?
-
-#### Characters:
-
-- the confused customer *Mrs Rose Frosting*
-- the agent *Miss Cherry Flour*
-
-#### Shop Name and theme
-
-Colours: 
-  - light blue 
-
-Name: 
+#### First step: our website
+We decided to build an example website to illustrate the changes that can be made and the variety of ways in which Surfly can be integrated into a website. We chose to design a website for a cake shop which makes personalized cakes and put emphasis on helping their clients and guiding them through the website.
+Here are a few screenshots of the website before we integrate Surfly:
 
 
-Slogan: *baking dreams come true*
 
-parody the disney logo in cake?! (castle as a cake)
+As you can see, it it a standard website with different pages and possible actions. We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
 
-Initially the developers are setting up the index page for their cake shop. They are a specialist cake shop and make the cake for the customer -> they make the fantasy cakes of their customers come true. Comunication is very important, and so they want co-browsing funcionality to show the different options, guide, and to offer greater support to clients. They decide to integrate Surfly: 
 
-*add inbound/ outbound information?*
+#### Second step: adding Surfly 
+First of all, we have to add Surfly to our website. This is easily achieve by logging in to your surfly.com account and navigating to the 'Settings' panel. You can then find the snippet code that you need to copy and paste into the source code of your website in the 'Integration' tab.
+It should look something like the following:
+```
+<script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
+widgetkey:"**your api key**",
+/*
+add your custom options here
+*/
+};
+var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();</script>
+```
 
-#### The story flow 
+You should also specify the domain name of your website so that you can accept requests made from it.
 
-First step:
- - create an index page (shop front) without Surfly functionality **first commit**
-   - then add the basic widget with no adaptations **second commit**
-   
+As you can see below, a red button appeared and allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
+
+#### Third step: widget options
+We are now able to start co-browsing sessions but the overall design doesn't really suit our website. Indeed, the bright red theme color of Surfly stands out and we would prefer to use our own theme color. This can be easily achieved by setting a few options in the widget we previously added.
+In our case, we simply used a few custom options:
+```
+ drawing_mode: "permanent", // change drawing mode so that the drawings last
+	chat_box_color: "#87cefa", // change color of chat box so that it suits our website's theme
+	theme_font_background: "#87cefa", // change color of button 
+	videochat: false // remove videochat feature (not needed)
+	
+```
+On the image below, you can now see that the button and the chat box are in our website's theme color. We also chose to disable the video chat feature that is included by default because we have no use for it. Finally, we decided to make the drawings permanent to facilitate communication.
+You can find an extensive list of widget options here(https://www.surfly.com/cobrowsing-api/).
+
+#### Fourth step: creating your own button
+Even though Surfly is now customised to our needs and preferences, we would like to create our own button to start a co-browsing session so that we can customise it and control its behaviour more easily.
+
 It doesnt sit as well on the website as they wanted so they experiment with the colors and options
 They then decide to remove the button entirley and have people use a cake instead
  
