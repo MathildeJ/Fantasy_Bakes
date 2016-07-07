@@ -9,12 +9,14 @@
 
     <title>Cake order</title>
     <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
-widgetkey:"dd402bb4940b4cf3a855aaa371d11419",
-hidden: true,
-cookie_transfer_enabled: true,
-cookie_transfer_proxying: false
-};
-var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();</script>
+    widgetkey:"dd402bb4940b4cf3a855aaa371d11419",
+    ui_off: true,
+    hidden: true,
+    cookie_transfer_enabled: true,
+    cookie_transfer_proxying: false
+    };
+    var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();
+    </script>
 
   </head>
 
@@ -82,6 +84,7 @@ var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src
 			sessionStorage.setItem("order_info_complete", "false");
 	      }
 	      document.cookie = 'order: name='+get_name+',email='+get_email+',address='+get_address;
+	      console.log(document.cookie);
               window.location.href = '/thank_you';
            }
         </script>
