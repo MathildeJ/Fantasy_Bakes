@@ -13,12 +13,27 @@ Here are a few screenshots of the website before we integrate Surfly:
 As you can see, it it a standard website with different pages and possible actions. We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
 
 
-#### The story flow 
+#### Second step: adding Surfly 
+First of all, we have to add Surfly to our website. This is easily achieve by logging in to your surfly.com account and navigating to the 'Settings' panel. You can then find the snippet code that you need to put into the source code of your website in the 'Integration' tab.
+It should look something like the following:
+```
+<script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
+widgetkey:"**your api key**",
+/*
+add your custom options here
+*/
+};
+var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();</script>
+```
 
-First step:
- - create an index page (shop front) without Surfly functionality **first commit**
-   - then add the basic widget with no adaptations **second commit**
-   
+You should also specify the domain name of your website so that you can accept requests made from it.
+
+As you can see below, a red button appeared and allows us to start a session. Surfly works straight away and we can instantly start a session and receive calls without any further configuration required. 
+
+#### Third step: widget options
+We are now able to start co-browsing sessions but the 
+
+
 It doesnt sit as well on the website as they wanted so they experiment with the colors and options
 They then decide to remove the button entirley and have people use a cake instead
  
