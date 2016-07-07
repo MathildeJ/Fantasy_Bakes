@@ -24,6 +24,7 @@
 	cookie_transfer_enabled: true,
   	cookie_transfer_proxying: false,
 	blacklist: JSON.stringify([{"pattern": ".*/about.*", "redirect": "https://young-tundra-78608.herokuapp.com/#restricted"}]),
+	QUEUE_METADATA_CALLBACK: new Function('return {"name": '+sessionStorage.getItem('metaName')+',"email": '+sessionStorage.getItem('metaEmail')+'}'),
 	};
 	var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();</script>
 
