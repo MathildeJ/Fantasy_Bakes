@@ -27,16 +27,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
-	widgetkey:"dd402bb4940b4cf3a855aaa371d11419",
-	drawing_mode: "permanent", // change drawing mode so that the drawings last
-	chat_box_color: "#87cefa", // change color of chat box so that it suits our website's theme
-	theme_font_background: "#87cefa", // change color of button 
-	videochat: false, // remove videochat feature (not needed)
-	hidden: true, // hide Surfly's default button
-	};
-	var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();</script>
     
 </head>
 
@@ -187,13 +177,22 @@
                     <hr class="visible-xs">
                      <p style="text-align:center;"> Want us to help you design the cake of your dreams? Come chat with us :)</p>
 		     <div style="text-align:center;">
-                     	<a href="#surflystart"> <button class="button" id="get_help_button"></button></a>
+                     	<button class="button" id="get_help_button" onclick="landing()"></button>
 		     </div>
                 </div>
             </div>
         </div>
 
     </div>
+
+    <script>
+    // the get help button redirects the user to the landing page (if they're not already in a session)
+    function landing(){
+	if(!window.__surfly){
+		window.location.href = '/landing_page';
+	}
+    }
+    </script>
 
     <!-- /.container -->
 

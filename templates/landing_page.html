@@ -9,6 +9,19 @@
     <title>Landing Page</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='landing_page_style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='button_style.css') }}">
+
+    <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
+	widgetkey:"dd402bb4940b4cf3a855aaa371d11419",
+	drawing_mode: "permanent", // change drawing mode so that the drawings last
+	chat_box_color: "#87cefa", // change color of chat box so that it suits our website's theme
+	theme_font_background: "#87cefa", // change color of button 
+	videochat: false, // remove videochat feature (not needed)
+	hidden: true, // hide Surfly's default button
+	block_until_agent_joins: false, // remove red banner
+	auto_start: true, // session will start automatically
+	};
+	var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();</script>
+
   </head>
 
   <body>
@@ -25,6 +38,28 @@
 	function redirect(){
 		window.location.href = '/';
 	}		
+	</script>
+
+	<script type="text/javascript">
+ 	// using the REST API to get information about the session
+	var request = new XMLHttpRequest();
+
+	request.open('GET', 'https://api.surfly.com/v2/sessions/?api_key=**your api key**&active_session=true');
+
+	request.onreadystatechange = function () {
+	  if (this.readyState === 4) {
+	    if(window.__surfly){
+		    var body = this.responseText; 
+		    // we extract the queue_id from the string we get from the request
+		    var index = body.indexOf("queue_id");
+		    var id = body.substring(index+10, body.length-2);
+		    // we display this id on the button
+		    document.getElementById("id_button").innerHTML=id;
+	    }
+	  }
+	};
+
+	request.send();
 	</script>
 
    </body>
