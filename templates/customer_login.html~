@@ -21,7 +21,7 @@
      }
      function getDetails(){
      // we display  a pop up with the input values 
-        //window.alert(Uname.value + " " +  Uemail.value);
+        window.alert(Uname.value + " " +  Uemail.value);
      // The variables have to be modified in order to be passed to the QUEUE_META_DATA function
         var name = "\""+Uname.value+"\"";
 	var email = "\""+Uemail.value+"\"";

@@ -7,6 +7,32 @@
     <title>Cake order</title>
   </head>
  
+     <script type="text/javascript">
+    // we create global variables to store the username and the user's email
+    var Uname
+    var Uemail 
+    function logIn(){
+    // the username is the input text entered in the user_name element within the form 
+      Uname = document.getElementById('user_name');
+    // the user's email is the unput text entetered in the user_email text box 
+      Uemail = document.getElementById('user_email');
+    // Display a pop-up to confirm the login
+      window.alert("welcome " + Uname.value);
+     }
+     function getDetails(){
+     // we display  a pop up with the input values 
+        //window.alert(Uname.value + " " +  Uemail.value);
+     // The variables have to be modified in order to be passed to the QUEUE_META_DATA function
+        var name = "\""+Uname.value+"\"";
+	var email = "\""+Uemail.value+"\"";
+     // we store the variables so that they can be passed to the desired page 
+        sessionStorage.setItem('metaName', name);
+        sessionStorage.setItem('metaEmail', email);
+     // redirect the user back to home
+        window.location.href="/";   
+      }
+     </script>
+
    <body>
       <img class="img-logo" src="../static/logo1.png" />
       <form action="" method="post" class="dark-matter">

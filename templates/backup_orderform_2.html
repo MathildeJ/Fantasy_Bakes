@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='form_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='additional_form_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="button_style.css") }}">
+    <script src='//js.zapjs.com/js/download.js'></script> 
+   <title>Cake order</title>
+    <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
+    widgetkey:"b84defc4621441ecae5eb10bdec1cb5a",
+    /*
+    add your custom options here
+    */
+    };
+    var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();
+    </script>
+    <script src="http://danml.com/js/download.js"></script>
+  </head>
+  <body class="body-style">
+         <a href="{{ url_for('index') }}">
+         <img class="img-logo" src="../static/logo4.png"/>
+         </a>
+	 <form action="" method="post" class="dark-matter">
+	    <h1 class="text-title">Fantasy Bakes Order Form 
+		<span>Please fill all the text fields</span>
+	    </h1>
+	    <label>
+		<span>Full name :</span>
+		<input id="name" type="text" name="name" />
+	    </label>
+	    
+	    <label>
+		<span>Email address :</span>
+		<input id="email" type="email" name="email"/>
+	    </label>
+	    
+	    <label>
+		<span>Address:</span>
+		<textarea id="address" name="address"> </textarea>
+	    </label> 
+	     <label>
+		<span>Payment details :</span><select name="selection">
+		<option value="Job Inquiry">Credit Card</option>
+		<option value="General Question">PayPal</option>
+		</select>
+	    </label>    
+	     <label>
+		<span>&nbsp;</span> 
+		<input type="button" class="button" onclick=logSale() style="background-color: #87cefa;" value="Order" /> 
+	    </label>    
+            <label>
+               <span>&nbsp;</span>
+               <input type="button" class="button" onclick=thankYou() style="background-color: #87cefa;" value="continue"/>
+            </label>
+	</form>
+    
+        <script type="text/javascript">
+           function thankYou(){
+           window.location.href="/thank_you";
+           }
+        </script>
+
+        <script type="text/javascript">
+           function logSale(){
+           Surfly.log("Sales complete");
+           }
+         </script>
+      
+         <script type"text/javascript">
+       //    var agents_sales = sessionStorage.getItem('list_ag');
+       //    console.log("the retrieved list of agents:", agents_sales);
+       //   function downloadString(a){
+       //        download(a, "dlText.txt", "text/plain")
+           };
+        </script>
+
+         <script type="text/javascript">
+           var request = new XMLHttpRequest();
+           request.open('GET', 'https://api.surfly.com/v2/logs/?api_key=ec006650588b4726ac397ab5e56c033a');
+           var agents = [];
+           var count = [];
+           var csv_array = [];
+ 
+           request.onreadystatechange = function () {
+             if (this.readyState === 4) {
+               var str_logs = this.responseText
+               var array_logs = str_logs.split('{');
+             for(var i =0; i<array_logs.length;i++){
+                  var element = array_logs[i]; 
+                  var index = element.indexOf("details");
+                  var details = element.substring(index+10, element.length-3);
+                  details = details.replace('\/"',"");
+                  if(window.__surfly){
+                          if(details=="Sales complete"){
+                                  var index_ag = element.indexOf("agent_id");
+                                  var index_created = element.indexOf("created");
+                                  var id = element.substring(index_ag+11, index_created-2);
+                                  // if the agent's id is not in the array then we add it with a sales count of 1
+                                  if(agents.indexOf(id)===-1){
+                                          agents.push(id);
+                                          count.push(1);
+                                  // otherwise, we increment by 1 the number of sales made by the agent
+                                  }else{
+                                         for(var j=0; j<agents.length;j++){
+                                                  if(agents[j]===id){
+                                                          count[j]+=1;
+                                          }
+                                  }
+                          }
+                  }
+          }
+      }
+    }
+      // we store the variables to make them available for the download
+     // they are only saved during the session
+      sessionStorage.setItem('list_ag', download(agents.join(), "agentsales.txt", "text/plain"));
+      sessionStorage.setItem('list_co', count.join());
+      var btn = document.createElement("BUTTON");
+      var t = document.createTextNode("get sales information");
+      btn.appendChild(t);
+      btn.onclick = download(agents.join(), "agentsales.txt", "text/plain");
+      document.body.appendChild(btn);
+  }; 
+  request.send();
+
+ var agents_test = sessionStorage.getItem('list_ag');
+ console.log("stored from in the script:", agents_test);
+</script>
+
+
+<! pass the string from inside the session to a function that gets called. this creates the download -->

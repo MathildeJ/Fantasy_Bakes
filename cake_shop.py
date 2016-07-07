@@ -17,6 +17,7 @@ def order_form():
 def survey():
    return render_template('survey.html')
 
+
 @app.route('/receipt')
 def receipt():
    return render_template('receipt.html')
@@ -24,6 +25,10 @@ def receipt():
 @app.route('/thank_you')
 def thank_you():
    return render_template('thank_you.html')
+
+@app.route('/login')
+def login():
+   return render_template('login.html')
 
 @app.route('/customer_login')
 def customer_login():
@@ -33,3 +38,14 @@ def customer_login():
 def thanks_survey():
    return render_template('thanks_survey.html')
 
+@app.route('/test')
+def test():
+   return render_template('backup_orderform_2.html')
+
+@app.route('/test_again')
+def test_again():
+   return render_template('test_again.html')
+
+@app.route('/restricted')
+def restricted():
+   return render_template('restricted.html')

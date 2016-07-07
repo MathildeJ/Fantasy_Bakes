@@ -4,13 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='form_style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='survey_style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="button_style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='button_style.css')}}">
     <title>Survey</title>
   </head>
 
   <body>
          <img class="img-logo" src="../static/logo1.png"/>
-	 <form action="" method="post" class="dark-matter">
+	 <form action="" method="post" id="survey" class="dark-matter">
 	    <h1>Survey
 		<span>Please give us feedback</span>
 	    </h1>
