@@ -183,7 +183,7 @@ var info = cookie.split(",");
 #### Advanced options
 Even though we were able to customise the integration of Surfly, we still would like to make small adjustments so that our website better suit our needs and the needs of our clients.
 
-### Blacklisting
+##### Blacklisting
 Indeed, we quickly realised that visitors shouldn't be allowed to access our baking shop page while they are in a Surfly session as it is a separate activity and the agents working for our cake shop are not necessarily qualified to guide our customers through our baking shop.
 
 In order to restrict access to this page (in our case, its path is '/about'), we can use the blacklist option:
@@ -203,7 +203,7 @@ Here, we simply decided to redirect to our custom restricted page which informs 
 
 
 
-### Queue metadata
+##### Queue metadata
 We also have repeat customers and would like to be able to give them a more personal experience. In particular, we want to retrieve their login details and pass them on as metadata in the queue so that, for instance, our agents can call them by name.
 
 Firstly, we need to store their information when they log in (in 'metaName' and 'metaEmail') and then we can pass this data by using the 'QUEUE_METADATA_CALLBACK' option:
@@ -211,6 +211,8 @@ Firstly, we need to store their information when they log in (in 'metaName' and 
 QUEUE_METADATA_CALLBACK: new Function('return {"name": '+sessionStorage.getItem('metaName')+',"email": '+sessionStorage.getItem('metaEmail')+'}'),
 ```
 To know more about the syntax used, click [here](https://www.surfly.com/cobrowsing-api/).
+
+As can be seen below, the agents can directly see this information from the 'Queue' panel:
 
 
 ### Remove UI
