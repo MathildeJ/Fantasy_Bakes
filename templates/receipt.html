@@ -105,7 +105,9 @@
 	console.log(cookie);
 	var index_order = cookie.indexOf("order");
 	cookie = cookie.substring(index_order, cookie.length);
-	cookie = cookie.substring(7, cookie.indexOf(";"));
+	if(cookie.indexOf(";")){
+		cookie = cookie.substring(7, cookie.indexOf(";"));
+	}
 	console.log(cookie);
 	var info = cookie.split(",");
 	if(sessionStorage.getItem("order_info_complete")==="true"||sessionStorage.getItem("order_info_complete")==null){
