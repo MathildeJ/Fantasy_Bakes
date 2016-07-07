@@ -150,7 +150,7 @@ Please note: you might need to set the 'hidden' option to 'false' for this optio
 #### Receipt
 Finally, we would also like to be able to show a receipt of the order a customer has placed. Therefore, we have to make sure that this information will be passed on even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
 
-The first thing we need to do is add the snippet code to all the pages we wish to transfer cookies from. We also have to set two cookies options to ensure session continuation:
+The first thing we need to do is add the snippet code to all the pages we wish to transfer cookies from (including the landing page). We also have to set two cookies options to ensure session continuation: 
 ```
 <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
 widgetkey:"**your api key**",
@@ -181,30 +181,42 @@ var info = cookie.split(",");
 
 
 #### Advanced options
+Even though we were able to customise the integration of Surfly, we still would like to make small adjustments so that our website better suit our needs and the needs of our clients.
 
-The developers are happy with the flow and wantto make some small adjustments - they decide to log the sales made by Mrs FLour. (maybe they work on commission). 
+### Blacklisting
+Indeed, we quickly realised that visitors shouldn't be allowed to access our baking shop page while they are in a Surfly session as it is a separate activity and the agents working for our cake shop are not necessarily qualified to guide our customers through our baking shop.
 
-Seventh step
-- logging sales made by the agent (surfly.log()) -> write as csv to an excel spreadsheet **eleventh commit**
+In order to restrict access to this page (in our case, its path is '/about'), we can use the blacklist option:
+```
+blacklist: JSON.stringify([{"pattern": ".*/about.*", "redirect": "https://example.com/#restricted"}]),
+```
+Even though it is optional, we also decided to specify a redirect link so that we can control how the user is going to be informed. More specifically, we chose to redirect the client to the home page with a #restricted hash. We can then simply add a script to implement the desired behaviour: 
+```
+<script>
+    if (window.location.hash == "#restricted"){
+    	window.location.href = '/restricted';
+    }
+</script>  
+```
+Here, we simply decided to redirect to our custom restricted page which informs the client that they cannot access this page from within a Surfly session.
 
-Realise that they need to restrict access to certain pages
 
-Eigth step
- - add a blacklist for a seperate business (baking shop with ingredients) - maybe the agents are only working for the cake shop and don't understand the baking side so well **twelfth commit**
 
-Then they have repeat customers/ loyal customers that they want to give a more personal experience to -> these customers have login details and pass names and email data to the agent(s). 
 
-Ninth step 
- - add metadata **thirteenth commit**
+### Queue metadata
+We also have repeat customers and would like to be able to give them a more personal experience. In particular, we want to retrieve their login details and pass them on as metadata in the queue so that, for instance, our agents can call them by name.
 
-At this point they decide that the functionality is not needed, and strip everything down to purely co-browsing
+Firstly, we need to store their information when they log in (in 'metaName' and 'metaEmail') and then we can pass this data by using the 'QUEUE_METADATA_CALLBACK' option:
+```
+QUEUE_METADATA_CALLBACK: new Function('return {"name": '+sessionStorage.getItem('metaName')+',"email": '+sessionStorage.getItem('metaEmail')+'}'),
+```
+To know more about the syntax used, click [here](https://www.surfly.com/cobrowsing-api/).
 
-Final step
 
-- We realsied that we don't need all the functionality e.g document sharing, so we will instead integrate zoopim, and just have the co-browsing functionality. Also allows us to have own control option/ exit button. 
-
+### Remove UI
+At this point they decide that the functionality is not needed, and strip everything down to purely co-browsing. We realsied that we don't need all the functionality e.g document sharing, so we will instead integrate zopim, and just have the co-browsing functionality. Also allows us to have own control option/ exit button. 
  - totally invisable 
- - remove UI and put own chat box and buttons **fourteenth commit** 
+ - remove UI **fourteenth commit** 
  - show stealth mode (don't even need a button) remove everything. (not a commit, just demonstration)
  - Create exit button **fifteenth commit**
- - Integrate Zoopim **sixteenth commit**
+ - Integrate Zopim **sixteenth commit**
