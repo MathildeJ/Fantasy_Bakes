@@ -4,7 +4,7 @@ We designed and created an example meant to explain how Surfly can be integrated
 If you are thinking about using Surfly or are a new user, you can follow this step by step example to understand how Surfly can be used.
 In particular, we decided to highlight the main features that we offer and show you how you can male Surfly as visible or invinsible as you wish depending on your needs and preferences.
 
-#### First step: our website
+#### Cake shop website
 We decided to build an example website to illustrate the changes that can be made and the variety of ways in which Surfly can be integrated into a website. We chose to design a website for a cake shop which makes personalized cakes and put emphasis on helping their clients and guiding them through the website.
 Here are a few screenshots of the website before we integrate Surfly:
 
@@ -13,7 +13,7 @@ Here are a few screenshots of the website before we integrate Surfly:
 As you can see, it it a standard website with different pages and possible actions. We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
 
 
-#### Second step: adding Surfly 
+#### Integrate Surfly 
 First of all, we have to add Surfly to our website. This is easily achieve by logging in to your surfly.com account and navigating to the 'Settings' panel. You can then find the snippet code that you need to copy and paste into the source code of your website in the 'Integration' tab.
 It should look something like the following:
 ```
@@ -30,7 +30,7 @@ You should also specify the domain name of your website so that you can accept r
 
 As you can see below, a red button appeared and allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
 
-#### Third step: widget options
+#### Widget options
 We are now able to start co-browsing sessions but the overall design doesn't really suit our website. Indeed, the bright red theme color of Surfly stands out and we would prefer to use our own theme color. This can be easily achieved by setting a few options in the widget we previously added.
 In our case, we simply used a few custom options:
 ```
@@ -41,23 +41,34 @@ In our case, we simply used a few custom options:
 	
 ```
 On the image below, you can now see that the button and the chat box are in our website's theme color. We also chose to disable the video chat feature that is included by default because we have no use for it. Finally, we decided to make the drawings permanent to facilitate communication.
-You can find an extensive list of widget options here(https://www.surfly.com/cobrowsing-api/).
+You can find an extensive list of widget options [here](https://www.surfly.com/cobrowsing-api/).
 
-#### Fourth step: creating your own button
+#### Creating your own button
 Even though Surfly is now customised to our needs and preferences, we would like to create our own button to start a co-browsing session so that we can customise it and control its behaviour more easily.
+First, we have to hide the default button since we will use our own. To do so, we simply set the 'hidden' option to 'true':
+```
+hidden: true, // hide Surfly's default button
+```
+Then, we simply need to add the #surflystart anchor to our custom button (get_help_button in our example):
+```
+<a href="#surflystart"> <button class="button" id="get_help_button"></button></a>
+```
+For instance, we have chosen to use the image of a cake as a get help button for our customers:
 
-It doesnt sit as well on the website as they wanted so they experiment with the colors and options
-They then decide to remove the button entirley and have people use a cake instead
- 
-Second step:
- - change color of chatbox/ drawing mode/ disable a few things **third commit - comments detailing exact changes** 
- - then create own button (a cake?) **fourth commit**
+#### Build your own landing page
+You might have noticed that when a visitor wishes to start a session they are put in a queue and, by default, have to wait for an agent to take the call to be able to navigate within the session. We would like our customer to be aware that they are in the queue (a red banner automatically displays this information) but also for a session to start automatically on our own customised page.
 
-They decide that the red banner is unsuitable, so remove it and then create a landing page, with a popup. They say that some of their clients still ask for help over the phone, so an agent can direct them to a Surfly session and then join them with the session id from the 'start' panel in the admin page. 
+In order to use such a page, we first need to remove the red banner blocking the session:
+```
+block_until_agent_joins: false,n // remove red banner
+```
+
 
 Third step 
  - remove the red banner **fith commit**
  - create landing page with own popup window (cake and name of cake shop, give a session id - if on the phone to the agent please pass this over to them now, otherwise please wait for an agent to join your session - automatically close popup when follower joins?) **sixth commit**
+
+#### Session behaviour
 
 Then we decide, we are happy with the integration, and want to test it, so enter Mrs flour and Mrs Frosting. Mrs Frosting starts a session, and then Mrs Flour joins. During the session, the developers notice a few things they want to change when Mrs Frosting placed her order. 
 
