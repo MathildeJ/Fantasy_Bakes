@@ -31,14 +31,18 @@ var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src
 See the commit [here](https://github.com/MathildeJ/Cake_shop_example/commit/a96e10a421c3204701704bcd35466a59393cce5c).
 You should also specify the domain name of your website so that you can accept requests made from it.
 
-As you can see below, a red button appeared and allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
+As you can see below, after adding the widget code to the source code of our website, a red button appeared and now allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
 
 ![Surfly widget](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s2.png)
+
+When a client clicks on the "get live help" button, the client is queue'd until an agent joins the session. The agent will be able to see the list of queue'd users in the Queue panel on the Surfly admin page.
+
+![user queue'd](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s3.png)
 
 
 #### Widget options
 
-We are now able to start co-browsing sessions but the overall design doesn't really suit our website. Indeed, the bright red theme color of Surfly stands out and we would prefer to use our own theme color. This can be easily achieved by setting a few options in the widget we previously added.
+We are now able to start co-browsing sessions but the overall design doesn't really suit our website and we would prefer to use our own theme color. This can be easily achieved by setting a few options in the widget we previously added.
 In our case, we simply used a few [custom options](https://github.com/MathildeJ/Cake_shop_example/commit/7a516bf17b0fdc8c8f66324070266a8469923ecd):
 ```
 drawing_mode: "permanent", // change drawing mode so that the drawings last
@@ -46,7 +50,7 @@ chat_box_color: "#87cefa", // change color of chat box so that it suits our webs
 theme_font_background: "#87cefa", // change color of button 
 videochat: false // remove videochat feature (not needed)
 ```
-On the images below, you can now see that the button and the chat box are in our website's theme color. We also chose to disable the video chat feature that is included by default because we have no use for it. Finally, we decided to make the drawings permanent to facilitate communication.
+On the images below, you can now see that the button and the chat box are in our website's theme color. We also chose to disable the video chat feature that is included by default, as we felt that it was not required. Finally, we decided to make the drawings permanent to facilitate communication.
 
 ![widget options 1](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s4.png) ![widget options 2](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s5.png)
 
@@ -73,7 +77,7 @@ Click [here](https://github.com/MathildeJ/Cake_shop_example/commit/77349a573223f
 
 #### Build your own landing page
 
-You might have noticed that when a visitor wishes to start a session they are put in a queue and, by default, have to wait for an agent to take the call to be able to navigate within the session. We would like our customer to be aware that they are in the queue (a red banner automatically displays this information) but also for a session to start automatically on our own customised page.
+You might have noticed that when a visitor wishes to start a session they are put in a queue and, by default, have to wait for an agent to take the call to be able to navigate within the session. We would like our customers to be aware that they are in the queue (a red banner automatically displays this information) but also for a session to start automatically on our own customised page.
 
 In order to use such a page, we first need to remove the red banner blocking the session:
 ```
@@ -206,7 +210,7 @@ Follow the changes in the code [here](https://github.com/MathildeJ/Cake_shop_exa
 
 #### Advanced options
 
-Even though we were able to customise the integration of Surfly, we still would like to make small adjustments so that our website better suit our needs and the needs of our clients.
+Even though we were able to customise the integration of Surfly, we still would like to make small adjustments so that our website better suits our needs and the needs of our clients.
 
 ##### Blacklisting
 
@@ -231,7 +235,7 @@ Even though it is optional, we also decided to specify a redirect link so that w
 
 ##### Queue metadata
 
-We also have repeat customers and would like to be able to give them a more personal experience. In particular, we want to retrieve their login details and pass them on as metadata in the queue so that, for instance, our agents can call them by name.
+We also have repeat customers and would like to be able to give them a more personal experience. More specifically, we want to retrieve their login details and pass them on as metadata in the queue so that, for instance, our agents can call them by name.
 
 Firstly, we need to store their information when they log in (in 'metaName' and 'metaEmail') and then we can pass this data by using the 'QUEUE_METADATA_CALLBACK' option:
 ```
@@ -246,7 +250,7 @@ As can be seen below, the agents can directly see this information from the 'Que
 
 ### Remove the UI
 
-Finally, we wanted to completly strip everything down to co-browsing. Indeed, we realised that, by default, Surfly provides more tools and features than we need. In fact, we are only interested in the co-browsing functionality and, ideally, we wish for Surfly to be completly invisible on our website.
+Finally, we wanted to completely strip everything down to co-browsing. Indeed, we realised that, by default, Surfly provides more tools and features than we need. In fact, we are only interested in the co-browsing functionality and, ideally, we wish for Surfly to be completly invisible on our website.
 
 Fortunately, there is an option which removes the Surfly user interface (UI) and therefore allows us to use our own custom elements to control the appearance and feel of the sessions:
 ```
@@ -256,7 +260,7 @@ ui_off: true, // make Surfly invisible
 
 ##### Exit button
 
-We already have our own start button and landing page but now that we removed the UI, we can't exit a session or use the chat. It's up to us to choose which functionality we want to add to our website and customise the way it will look.
+We already have our own start button and landing page but now that we have removed the UI, we can't exit a session or use the chat. It's up to us to choose which functionality we want to add to our website and customise the way it will look.
 
 In our example, we chose to create our own exit session button and add it to all the necessary pages. 
 First of all, we have to make sure that the page we are adding the button to contains the Surfly widget and then we can simply add our custom button:
