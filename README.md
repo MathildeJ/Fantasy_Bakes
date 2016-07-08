@@ -237,11 +237,12 @@ ui_off: true, // make Surfly invisible
 ##### Exit button
 We already have our own start button and landing page but now that we removed the UI, we can't exit a session or use the chat. It's up to us to choose which functionality we want to add to our website and customise the way it will look.
 
-In our example, we chose to create our own exit session button and add it to all the necessary pages. First of all, we have to make sure that the page we are adding the button to contains the Surfly widget and then we can simply add our custom button:
+In our example, we chose to create our own exit session button and add it to all the necessary pages. 
+First of all, we have to make sure that the page we are adding the button to contains the Surfly widget and then we can simply add our custom button:
 ```
 <button class="button" id="exit_button" style="visibility:hidden" onclick="exitSession()">Exit session</button>
 ```
-Considering that it is an exit button, we do not want it to be shown when the customer is not in a session.  We can easily make sure that the exit button is visible only when there is an on-going Surfly session (and, analogically, that the get help section of our website is only available when the user is not in a Surfly session):
+Considering that it is an exit button, we do not want it to be shown when the customer is not in a session.  We can easily make sure that the exit button is visible only when there is an on-going Surfly session (and, analogically, we can also control the behaviour of the get help button on the home page):
 ```
 <script>
    if(window.__surfly){
@@ -273,7 +274,7 @@ request.onreadystatechange = function () {
 request.send();	
 </script>
 ```
-Once we've store the session ID, we can use a second request which will use this information to end the current session:
+Once we've stored the session ID, we can use a second request which will use this information to end the current session:
 ```
    <script>
     // end session
