@@ -121,7 +121,7 @@ To enable field masking (the follower will not see the leader's input), we can s
 <span>Card Number</span>
 <input type="text" size="20" data-stripe="number" surfly_private>
 ```
-In our example, we will use this option on the three last fields of our order form as they contain information about the client's card.
+In our example, we will use this option on the three last fields of our order form as they contain information about the client's card. As can be seen in the image, the agent only see crosses instead of the leader's input:
 
 ![field masking](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s8.png)
 
