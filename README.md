@@ -230,17 +230,18 @@ As can be seen below, the agents can directly see this information from the 'Que
 ### Remove the UI
 Finally, we wanted to completly strip everything down to co-browsing. Indeed, we realised that, by default, Surfly provides more tools and features than we need. In fact, we are only interested in the co-browsing functionality and, ideally, we wish for Surfly to be completly invisible on our website.
 
-Hopefully, there is an option which remove the Surfly user interface (UI) and therefore allow us to use our own custom elements to control the appearance and feel of the sessions:
+Fortunately, there is an option which remove the Surfly user interface (UI) and therefore allow us to use our own custom elements to control the appearance and feel of the sessions:
 ```
 ui_off: true, // make Surfly invisible
 ```
 ##### Exit button
-We already have our own start button and landing page but now that we removed the UI, we can't exit a session or use the chat. It's up to us to chose which functionality we want to add to our website and customise the way it will look.
+We already have our own start button and landing page but now that we removed the UI, we can't exit a session or use the chat. It's up to us to choose which functionality we want to add to our website and customise the way it will look.
+
 In our example, we chose to create our own exit session button and add it to all the necessary pages. First of all, we have to make sure that the page we are adding the button to contains the Surfly widget and then we can simply add our custom button:
 ```
 <button class="button" id="exit_button" style="visibility:hidden" onclick="exitSession()">Exit session</button>
 ```
-Considering that it is an exit button, we do not want it to be shown when the customer is not in a session.  We can easily make sure that the exit button is visible only when there is an on-going Surfly session (and analogically, that the get help section of our website is only available when the user is not in a Surfly session):
+Considering that it is an exit button, we do not want it to be shown when the customer is not in a session.  We can easily make sure that the exit button is visible only when there is an on-going Surfly session (and, analogically, that the get help section of our website is only available when the user is not in a Surfly session):
 ```
 <script>
    if(window.__surfly){
@@ -252,12 +253,12 @@ Considering that it is an exit button, we do not want it to be shown when the cu
    }
 </script>
 ```
-Finally, we have to define the action triggered by the button that is to say ending a session. To do so, we can once again use the REST API. The first request allow us to retrieve the session ID:
+Finally, we have to define the action triggered by the button that is to say ending a session. To do so, we can once again use the REST API. The first request allows us to retrieve the session ID:
 ```
 <script>
 // get session ID
 var request = new XMLHttpRequest();
-request.open('GET', 'https://api.surfly.com/v2/sessions/?	api_key=33c092b9d4d6425e817f5140447e43da&active_session=true');
+request.open('GET', 'https://api.surfly.com/v2/sessions/?api_key=**your api key**&active_session=true');
 request.onreadystatechange = function () {
 	if (this.readyState === 4) {
 		if(window.__surfly){
@@ -297,7 +298,7 @@ Once we've store the session ID, we can use a second request which will use this
 ```
 ![exit button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s10.png)
 
-Please note: considering how our website is built, there is a unique get help button which means that our customers can only start a session from the home page (by clicking a button which redirects them to the landing page). However, stealth mode is activated by default on all the pages containing the Surfly widget and allows to start session instantly by pressing Ctrl + Enter.
+Please note: considering how our website is built, there is a unique get help button which means that our customers can only start a session from the home page (by clicking a button which redirects them to the landing page). However, stealth mode is activated by default on all the pages containing the Surfly widget and allows to start a session instantly by pressing Ctrl + Enter.
 
 ##### Integrate an already existing chat solution
 Finally, we would also like to be able to keeping chatting with our clients in a Surfly session. As a matter of fact, we wish to use Zopim which is the chat solution we were using prior to the integration of Surfly. We can simply add the Zopim snippet code to all the pages of our website and we will be able to communicate with our clients inside and outside of a Surfly session without any disturbance when we enter/exit one:
