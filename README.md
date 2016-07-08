@@ -83,7 +83,7 @@ Once [this](https://github.com/MathildeJ/Cake_shop_example/commit/80d85997b86a20
 ```
 auto_start: true, // session will start automatically
 ```
-We already have our own button which starts a Surfly session on the home page but we now what this button to redirect the user to the landing page. We simply need to remove the #surflystart anchor and add an onclick function which does just that:
+We already have our own button which starts a Surfly session on the home page but we now want this button to redirect the user to the landing page. We simply need to remove the #surflystart anchor and add an onclick function which does just that:
 ```
 <button class="button" id="get_help_button" onclick="landing()"></button>
 
@@ -122,10 +122,11 @@ Finally, we need to display the Queue ID on the landing page when a session star
 ```
 ![landing page](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s7.png)
 
-As you can see above, we now have our own personalised landing page to greet our customers.
+As you can see above, we now have our own personalised landing page to greet our customers. You can see the changes [here](https://github.com/MathildeJ/Cake_shop_example/commit/5610cedd114a2e41d1db48426298043cc181df42).
 
 
 #### Session behaviour
+
 We have already managed to integrate Surfly in a way that suits our needs but there are other use cases that we still haven't covered. In particular, when a client places an order while they are in a session, we do not want the agent to be able to see their payment details or to click the 'Order' button for them (if they are in control of the session). 
 This can be easily achieved by using some of the built-in options provided with Surfly.
 
@@ -134,11 +135,11 @@ To enable field masking (the follower will not see the leader's input), we can s
 <span>Card Number</span>
 <input type="text" size="20" data-stripe="number" surfly_private>
 ```
-In our example, we will use this option on the three last fields of our order form as they contain information about the client's card. As can be seen in the image, the agent only see crosses instead of the leader's input:
+In our [example](https://github.com/MathildeJ/Cake_shop_example/commit/95b14099960bde13c0aa4b76b55e7812cec19613), we will use this option on the three last fields of our order form as they contain information about the client's card. As can be seen in the image, the agent only see crosses instead of the leader's input:
 
 ![field masking](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s8.png)
 
-As for the 'Order' button, we can easily add an eventListener in order to catch the 'surflycontrolchange' event which is fired every time the control is switched within a Surfly session. Then, we check whether or not the leader is in control and disable the order button if they are not.
+As for the 'Order' button, we can easily add an eventListener in order to catch the 'surflycontrolchange' event which is fired every time the control is switched within a Surfly session. Then, we check whether or not the leader is in control and disable the order button if they are not (see the commit [here](https://github.com/MathildeJ/Cake_shop_example/commit/0c67d3bbaabbefd9b1d2acf752fd487278418a73)).
 ```
 <script>
 // when the leader is in control then the 'Order' button is clickable otherwise, it is disabled
@@ -155,18 +156,21 @@ window.addEventListener('surflycontrolchange', function (event) {
 
 
 #### Ask for feedback
-Since customer service is very important to us, we also would like to be able to ask for feedback at the end of a session so that we can improve our website and offer the smoothest co-browsing experience to our clients.
-We have already created a survey page so we only needed to use the 'end_of_session_popup_url' option:
+
+Since customer service is very important to us, we would also like to be able to ask for feedback at the end of a session so that we can improve our website and offer the smoothest co-browsing experience to our clients.
+We have already created a survey page so we only need to use the 'end_of_session_popup_url' option:
 ```
 end_of_session_popup_url: "https://example.com/survey",
 ```
+You can find the commit [here](https://github.com/MathildeJ/Cake_shop_example/commit/4c6b4776f1199a4a8b063bc63f82220736610757).
 Please note: you might need to set the 'hidden' option to 'false' for this option to work correctly
 
 ![survey](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s9.png)
 
 
 #### Receipt
-Finally, we would also like to be able to show a receipt of the order a customer has placed. Therefore, we have to make sure that this information will be passed on even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
+
+Finally, we would like to be able to show a receipt of the order a customer has placed. Therefore, we have to make sure that this information will be passed on even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
 
 The first thing we need to do is add the snippet code to all the pages we wish to transfer cookies from. We also have to set two cookies options to ensure session continuation (including on the landing page): 
 ```
@@ -194,13 +198,18 @@ cookie = cookie.substring(index_order, cookie.length);
 var info = cookie.split(",");
 ```
 In the gif below, you can see that the order details are available even if the session ends before the client get their receipt:
+
 ![receipt](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/receipt.gif)
+
+Follow the changes in the code [here](https://github.com/MathildeJ/Cake_shop_example/commit/2de46d44e5bd2c2e8c24431be7007f0381aa5784).
 
 
 #### Advanced options
+
 Even though we were able to customise the integration of Surfly, we still would like to make small adjustments so that our website better suit our needs and the needs of our clients.
 
 ##### Blacklisting
+
 Indeed, we quickly realised that visitors shouldn't be allowed to access our baking shop page while they are in a Surfly session as it is a separate activity and the agents working for our cake shop are not necessarily qualified to guide our customers through our baking shop.
 
 In order to restrict access to this page (in our case, its path is '/about'), we can use the blacklist option:
@@ -215,19 +224,20 @@ Even though it is optional, we also decided to specify a redirect link so that w
     }
 </script>  
 ```
-Here, we simply decided to redirect the user to our custom restricted page which informs them that they cannot access this page while they are in a session:
+[Here](https://github.com/MathildeJ/Cake_shop_example/commit/a1b6efcd9f46889db58dab2e56a10faa9a73a02b), we simply decided to redirect the user to our custom restricted page which informs them that they cannot access this page while they are in a session:
 
 ![blacklist](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/blacklist.gif)
 
 
 ##### Queue metadata
+
 We also have repeat customers and would like to be able to give them a more personal experience. In particular, we want to retrieve their login details and pass them on as metadata in the queue so that, for instance, our agents can call them by name.
 
 Firstly, we need to store their information when they log in (in 'metaName' and 'metaEmail') and then we can pass this data by using the 'QUEUE_METADATA_CALLBACK' option:
 ```
 QUEUE_METADATA_CALLBACK: new Function('return {"name": '+sessionStorage.getItem('metaName')+',"email": '+sessionStorage.getItem('metaEmail')+'}'),
 ```
-To know more about the syntax used for this option, click [here](https://www.surfly.com/cobrowsing-api/).
+You can fin the source code [here](https://github.com/MathildeJ/Cake_shop_example/commit/78d214c358920cab1d7a1b0886c3c211e713832f). To know more about the syntax used for this option, click [here](https://www.surfly.com/cobrowsing-api/).
 
 As can be seen below, the agents can directly see this information from the 'Queue' panel:
 
@@ -235,13 +245,17 @@ As can be seen below, the agents can directly see this information from the 'Que
 
 
 ### Remove the UI
+
 Finally, we wanted to completly strip everything down to co-browsing. Indeed, we realised that, by default, Surfly provides more tools and features than we need. In fact, we are only interested in the co-browsing functionality and, ideally, we wish for Surfly to be completly invisible on our website.
 
-Fortunately, there is an option which remove the Surfly user interface (UI) and therefore allow us to use our own custom elements to control the appearance and feel of the sessions:
+Fortunately, there is an option which removes the Surfly user interface (UI) and therefore allows us to use our own custom elements to control the appearance and feel of the sessions:
 ```
 ui_off: true, // make Surfly invisible
 ```
+
+
 ##### Exit button
+
 We already have our own start button and landing page but now that we removed the UI, we can't exit a session or use the chat. It's up to us to choose which functionality we want to add to our website and customise the way it will look.
 
 In our example, we chose to create our own exit session button and add it to all the necessary pages. 
@@ -304,11 +318,14 @@ Once we've stored the session ID, we can use a second request which will use thi
   }
   </script>
 ```
+To see the corresponding commit, click [here](https://github.com/MathildeJ/Cake_shop_example/commit/78d214c358920cab1d7a1b0886c3c211e713832f).
 ![exit button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s10.png)
 
 Please note: considering how our website is built, there is a unique get help button which means that our customers can only start a session from the home page (by clicking a button which redirects them to the landing page). However, stealth mode is activated by default on all the pages containing the Surfly widget and allows to start a session instantly by pressing Ctrl + Enter.
 
+
 ##### Integrate an already existing chat solution
+
 Finally, we would also like to be able to keeping chatting with our clients in a Surfly session. As a matter of fact, we wish to use Zopim which is the chat solution we were using prior to the integration of Surfly. We can simply add the Zopim snippet code to all the pages of our website and we will be able to communicate with our clients inside and outside of a Surfly session without any disturbance when we enter/exit one:
 ```
 <!-- Adding Zopim Live Chat -->
@@ -323,4 +340,4 @@ Finally, we would also like to be able to keeping chatting with our clients in a
 </script>
 <!--End of Zopim Live Chat Script-->
 ```
-You will probably notice that we added a condition in the beginning of the script to make sure that a second Zopim chat window is not opened when a Surfly session starts.
+You will probably [notice](https://github.com/MathildeJ/Cake_shop_example/commit/79613e5d43a34f4317a7b3dcfdcf24ddc8c9f199) that we added a condition in the beginning of the script to make sure that a second Zopim chat window is not opened when a Surfly session starts.
