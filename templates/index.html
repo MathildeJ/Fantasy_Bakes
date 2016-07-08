@@ -186,7 +186,7 @@
             </div>
         </div>
 
-	<div class="row">
+	<div class="row" id="get_help">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
@@ -224,8 +224,10 @@
    <script>
    if(window.__surfly){
 	document.getElementById('exit_button').style.visibility="visible";
+	document.getElementById('get_help').style.visibility="hidden";	
    } else {
 	document.getElementById('exit_button').style.visibility="hidden";
+	document.getElementById('get_help').style.visibility="visible";
    }
    </script>
 
@@ -237,7 +239,6 @@
 	request_end.onreadystatechange = function () {
   		if (this.readyState === 4) {
 			var body = this.responseText;
-			console.log(body);
 			var index = body.indexOf("response");
 			var success = body.substring(index+11, body.length-2);
 			if(success==="Session has been ended successfully"){				

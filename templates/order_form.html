@@ -17,10 +17,22 @@
     };
     var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();
     </script>
-
+    <!--Adding Zopim-->
+    <script>
+	if(!window.__surfly){
+	    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+	    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+	    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+	    $.src="//v2.zopim.com/?40l495kTPWFGA7JFrUDzK03KARqCPsNL";z.t=+new Date;$.
+	    type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");  
+	}
+    </script>
   </head>
 
   <body class="body-style">
+    <div style="text-align:right;">
+      <button class="button" id="exit_button" style="visibility:hidden" onclick="exitSession()">Exit session</button>
+    </div>
          <a href="{{ url_for('index') }}">
          <img class="img-logo" src="../static/logo4.png"/>
          </a>
@@ -84,7 +96,6 @@
 			sessionStorage.setItem("order_info_complete", "false");
 	      }
 	      document.cookie = 'order: name='+get_name+',email='+get_email+',address='+get_address;
-	      console.log(document.cookie);
               window.location.href = '/thank_you';
            }
         </script>
@@ -100,5 +111,32 @@
 	    }
 	});
 	</script>
+
+	   <script>
+	   if(window.__surfly){
+		document.getElementById('exit_button').style.visibility="visible";
+	   } else {
+		document.getElementById('exit_button').style.visibility="hidden";
+	   }
+	   </script>
+
+	<script type="text/javascript">
+	    // end session
+	    function exitSession(){
+		var request_end = new XMLHttpRequest();
+		request_end.open('DELETE', 'https://api.surfly.com/v2/sessions/'+sessionStorage.getItem("session_id")+'/?api_key=33c092b9d4d6425e817f5140447e43da');
+		request_end.onreadystatechange = function () {
+	  		if (this.readyState === 4) {
+				var body = this.responseText;
+				var index = body.indexOf("response");
+				var success = body.substring(index+11, body.length-2);
+				if(success==="Session has been ended successfully"){				
+					Surfly.endSession('https://young-tundra-78608.herokuapp.com/');
+				}
+	 		}
+		};
+		request_end.send();
+	  }
+	  </script>
   </body>
 </html>
