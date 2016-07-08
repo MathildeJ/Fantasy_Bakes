@@ -41,6 +41,9 @@
 <body>
     <div class="brand">  <img class="img-logo" src="../static/logo4.png"/> Fantasy Bakes</div>
     <div class="address-bar">123 A Street | Some City, XY 12345 | 890.567.1234</div>
+    <div style="text-align:right;">
+      <button class="button" id="exit_button" style="visibility:hidden" onclick="exitSession()">Exit session</button>
+    </div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
@@ -207,6 +210,35 @@
     	window.location.href = '/restricted';
     }
     </script> 
+
+   <script>
+   if(window.__surfly){
+	document.getElementById('exit_button').style.visibility="visible";
+   } else {
+	document.getElementById('exit_button').style.visibility="hidden";
+   }
+   </script>
+
+   <script>
+    // end session
+    function exitSession(){
+	var request_end = new XMLHttpRequest();
+	request_end.open('DELETE', 'https://api.surfly.com/v2/sessions/'+sessionStorage.getItem("session_id")+'/?api_key=33c092b9d4d6425e817f5140447e43da');
+	request_end.onreadystatechange = function () {
+  		if (this.readyState === 4) {
+			var body = this.responseText;
+			var index = body.indexOf("response");
+			// make sure the session ended
+			var success = body.substring(index+11, body.length-2);
+			if(success==="Session has been ended successfully"){
+				// end the session
+				Surfly.endSession('https://young-tundra-78608.herokuapp.com/');
+			}
+ 		}
+	};
+	request_end.send();
+  }
+   </script>
 
     <!-- /.container -->
 
