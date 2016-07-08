@@ -10,7 +10,7 @@ Here is a screenshot of the home page before we integrate Surfly:
 
 ![website](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s1.png)
 
-As you can see, it is a standard website with different pages and possible actions. We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
+As you can [see](https://github.com/MathildeJ/Cake_shop_example/commits/master/4cbf4486ecc3e93a442a46488588698466891dbb), it is a standard website with different pages and possible actions. We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
 
 
 #### Integrate Surfly 
