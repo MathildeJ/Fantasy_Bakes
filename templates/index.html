@@ -229,7 +229,7 @@
    }
    </script>
 
-   <script>
+   <script type="text/javascript">
     // end session
     function exitSession(){
 	var request_end = new XMLHttpRequest();
@@ -237,18 +237,17 @@
 	request_end.onreadystatechange = function () {
   		if (this.readyState === 4) {
 			var body = this.responseText;
+			console.log(body);
 			var index = body.indexOf("response");
-			// make sure the session ended
 			var success = body.substring(index+11, body.length-2);
-			if(success==="Session has been ended successfully"){
-				// end the session
-				Surfly.endSession('https://young-tundra-78608.herokuapp.com/');
+			if(success==="Session has been ended successfully"){				
+				Surfly.endSession('https://polite-parliment-37403.herokuapp.com/');
 			}
  		}
 	};
 	request_end.send();
   }
-   </script>
+  </script>
 
     <!-- /.container -->
 
