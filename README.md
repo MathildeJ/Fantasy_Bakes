@@ -1,19 +1,20 @@
 # Blog post draft
 
 We designed and created an example meant to explain how Surfly can be integrated into your own website and most importantly to show the different customisation possibilities it provides.
-If you are thinking about using Surfly or are a new user, you can follow this step by step example to understand how Surfly can be used.
-In particular, we decided to highlight the main features that we offer and show you how you can male Surfly as visible or invinsible as you wish depending on your needs and preferences.
+If you are thinking about using Surfly or are a new user, you can follow this step by step example to understand how Surfly can be integrated and customised.
+In particular, we decided to highlight the main features that we offer and show you how you can make Surfly as visible or invisible as you wish depending on your needs and preferences.
 
 #### Cake shop website
-We decided to build an example website to illustrate the changes that can be made and the variety of ways in which Surfly can be integrated into a website. We chose to design a website for a cake shop which makes personalized cakes and put emphasis on helping their clients and guiding them through the website.
-Here are a few screenshots of the website before we integrate Surfly:
+We decided to build an example website to illustrate the changes that can be made and the variety of ways in which Surfly can be integrated into a website. We chose to design a website for a cake shop which makes personalized cakes and put emphasis on helping their clients and guiding them through their website.
+Here is a screenshot of the home page before we integrate Surfly:
 
+![website](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s1.png)
 
 As you can see, it is a standard website with different pages and possible actions. We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
 
 
 #### Integrate Surfly 
-First of all, we have to add Surfly to our website. This is easily achieve by logging in to your surfly.com account and navigating to the 'Settings' panel. You can then find the snippet code that you need to copy and paste into the source code of your website in the 'Integration' tab.
+First of all, we have to add Surfly to our website. This is easily achieve by logging in to your surfly.com account and navigating to the 'Settings' panel. In the 'Integration' tab, you can then find the snippet code that you need to copy and paste into the source code of your website.
 It should look something like the following:
 ```
 <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
@@ -29,6 +30,8 @@ You should also specify the domain name of your website so that you can accept r
 
 As you can see below, a red button appeared and allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
 
+![Surfly widget](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s2.png)
+
 
 #### Widget options
 We are now able to start co-browsing sessions but the overall design doesn't really suit our website. Indeed, the bright red theme color of Surfly stands out and we would prefer to use our own theme color. This can be easily achieved by setting a few options in the widget we previously added.
@@ -40,11 +43,15 @@ theme_font_background: "#87cefa", // change color of button
 videochat: false // remove videochat feature (not needed)
 ```
 On the image below, you can now see that the button and the chat box are in our website's theme color. We also chose to disable the video chat feature that is included by default because we have no use for it. Finally, we decided to make the drawings permanent to facilitate communication.
+
+![widget options 1](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s4.png) ![widget options 2](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s5.png)
+
 You can find an extensive list of widget options [here](https://www.surfly.com/cobrowsing-api/).
 
 
 #### Create your own button
 Even though Surfly is now customised to our needs and preferences, we would like to create our own button to start a co-browsing session so that we can customise it and control its behaviour more easily.
+
 First, we have to hide the default button since we will use our own. To do so, we simply set the 'hidden' option to 'true':
 ```
 hidden: true, // hide Surfly's default button
@@ -53,7 +60,10 @@ Then, we simply need to add the #surflystart anchor to our custom button (get_he
 ```
 <a href="#surflystart"> <button class="button" id="get_help_button"></button></a>
 ```
-For instance, we have chosen to use the image of a cake as a get help button for our customers:
+In particular, we have chosen to use the image of a cake as a get help button for our customers:
+
+![custom button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s6.png)
+
 
 #### Build your own landing page
 You might have noticed that when a visitor wishes to start a session they are put in a queue and, by default, have to wait for an agent to take the call to be able to navigate within the session. We would like our customer to be aware that they are in the queue (a red banner automatically displays this information) but also for a session to start automatically on our own customised page.
@@ -62,11 +72,11 @@ In order to use such a page, we first need to remove the red banner blocking the
 ```
 block_until_agent_joins: false, // remove red banner
 ```
-Once this is done, we have to move the snippet code to our landing page (since it will be the page from which sessions start) and to add the auto start option so that a session will start automatically as soon as the button is clicked:
+Once this is done, we have to move the snippet code to our landing page (since it will be the page from which sessions start) and to add the auto start option so that a session will start automatically (as soon as the user is redirected to our landing page):
 ```
 auto_start: true, // session will start automatically
 ```
-We already have our own button which starts a Surfly session from the landing page so we simply need to remove the #surflystart anchor and add an onclick function which redirects the user to our new landing page:
+We already have our own button which starts a Surfly session on the home page but we now what this button to redirect the user to the landing page. We simply need to remove the #surflystart anchor and add an onclick function which does just that:
 ```
 <button class="button" id="get_help_button" onclick="landing()"></button>
 
@@ -79,7 +89,7 @@ We already have our own button which starts a Surfly session from the landing pa
     }
 </script>
 ```
-Finally, we need to display the Queue ID on the landing page when a session starts so that the customer is aware that they are in the queue and, in some cases, so that they can communicate it to an agent they were already in contact with (over the phone for example). To do this, we use the REST API to get some information about the session (more information on how to use the REST API can be found [here](https://www.surfly.com/cobrowsing-api/)):
+Finally, we need to display the Queue ID on the landing page when a session starts so that the customer is aware that they are in the queue and, in some cases, so that they can communicate it to an agent they were already in contact with (over the phone for example). To do this, we use the REST API to get some information about the session and only keep the data we are interested in (more information on how to use the REST API can be found [here](https://www.surfly.com/cobrowsing-api/)):
 ```
 <script>
  	// using the REST API to get information about the session
@@ -103,13 +113,13 @@ Finally, we need to display the Queue ID on the landing page when a session star
 	request.send();
 </script>
 ```
-
+![landing page](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s7.png)
 
 As you can see above, we now have our own personalised landing page to greet our customers.
 
 
 #### Session behaviour
-We have already managed to integrate Surfly in a way that suit our needs but there are other use cases that we still haven't covered. In particular, when a client places an order while they are in a session, we do not want the agent to be able to see their payment details or to click the 'Order' button for them if they are in control of the session. 
+We have already managed to integrate Surfly in a way that suits our needs but there are other use cases that we still haven't covered. In particular, when a client places an order while they are in a session, we do not want the agent to be able to see their payment details or to click the 'Order' button for them (if they are in control of the session). 
 This can be easily achieved by using some of the built-in options provided with Surfly.
 
 To enable field masking (the follower will not see the leader's input), we can simply add the 'surfly_private' attribute to fields containing sensitive information:
@@ -117,13 +127,14 @@ To enable field masking (the follower will not see the leader's input), we can s
 <span>Card Number</span>
 <input type="text" size="20" data-stripe="number" surfly_private>
 ```
-In our example, we will use this option on the three last fields of our order form as they contain information about the client's card.
+In our example, we will use this option on the three last fields of our order form as they contain information about the client's card. As can be seen in the image, the agent only see crosses instead of the leader's input:
 
+![field masking](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s8.png)
 
 As for the 'Order' button, we can easily add an eventListener in order to catch the 'surflycontrolchange' event which is fired every time the control is switched within a Surfly session. Then, we check whether or not the leader is in control and disable the order button if they are not.
 ```
 <script>
-// when the leader is in control then the 'buy' button is clickable otherwise, it is disabled
+// when the leader is in control then the 'Order' button is clickable otherwise, it is disabled
 window.addEventListener('surflycontrolchange', function (event) {
     var element = document.getElementById("order_button");
     if (event.leaderHasControl) {
@@ -144,13 +155,13 @@ end_of_session_popup_url: "https://example.com/survey",
 ```
 Please note: you might need to set the 'hidden' option to 'false' for this option to work correctly
 
-
+![survey](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s9.png)
 
 
 #### Receipt
 Finally, we would also like to be able to show a receipt of the order a customer has placed. Therefore, we have to make sure that this information will be passed on even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
 
-The first thing we need to do is add the snippet code to all the pages we wish to transfer cookies from (including the landing page). We also have to set two cookies options to ensure session continuation: 
+The first thing we need to do is add the snippet code to all the pages we wish to transfer cookies from. We also have to set two cookies options to ensure session continuation (including on the landing page): 
 ```
 <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
 widgetkey:"**your api key**",
@@ -173,11 +184,10 @@ Finally, we have to get the cookies and display the retrieved data (parsed accor
 var cookie = document.cookie;
 var index_order = cookie.indexOf("order");
 cookie = cookie.substring(index_order, cookie.length);
-cookie = cookie.substring(7, cookie.indexOf(";"));
 var info = cookie.split(",");
 ```
-
-
+In the gif below, you can see that the order details are available even if the session ends before the client get their receipt:
+![receipt](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/receipt.gif)
 
 
 #### Advanced options
@@ -198,9 +208,9 @@ Even though it is optional, we also decided to specify a redirect link so that w
     }
 </script>  
 ```
-Here, we simply decided to redirect to our custom restricted page which informs the client that they cannot access this page from within a Surfly session.
+Here, we simply decided to redirect the user to our custom restricted page which informs them that they cannot access this page while they are in a session:
 
-
+![blacklist](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/blacklist.gif)
 
 
 ##### Queue metadata
@@ -213,6 +223,8 @@ QUEUE_METADATA_CALLBACK: new Function('return {"name": '+sessionStorage.getItem(
 To know more about the syntax used for this option, click [here](https://www.surfly.com/cobrowsing-api/).
 
 As can be seen below, the agents can directly see this information from the 'Queue' panel:
+
+![metadata](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/metadata.gif)
 
 
 ### Remove the UI
@@ -283,6 +295,8 @@ Once we've store the session ID, we can use a second request which will use this
   }
   </script>
 ```
+![exit button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s10.png)
+
 Please note: considering how our website is built, there is a unique get help button which means that our customers can only start a session from the home page (by clicking a button which redirects them to the landing page). However, stealth mode is activated by default on all the pages containing the Surfly widget and allows to start session instantly by pressing Ctrl + Enter.
 
 ##### Integrate an already existing chat solution
