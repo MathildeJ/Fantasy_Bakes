@@ -322,7 +322,7 @@ Once we've stored the session ID, we can use a second request which will use thi
   }
   </script>
 ```
-To see the corresponding commit, click [here](https://github.com/MathildeJ/Cake_shop_example/commit/78d214c358920cab1d7a1b0886c3c211e713832f).
+To see the corresponding commit, click [here](https://github.com/MathildeJ/Cake_shop_example/commit/21c8a2b69093d1dd0649a13951964bfa586a3e1b).
 ![exit button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s10.png)
 
 Please note: considering how our website is built, there is a unique get help button which means that our customers can only start a session from the home page (by clicking a button which redirects them to the landing page). However, stealth mode is activated by default on all the pages containing the Surfly widget and allows to start a session instantly by pressing Ctrl + Enter.
