@@ -1,18 +1,18 @@
 # Blog post draft
 
-We designed and created an example meant to explain how Surfly can be integrated into your own website and most importantly to show the different customisation possibilities it provides.
+We designed and created an example application in order to demonstrate how Surfly can be integrated into your own website and the wide range of customisation options you can choose from.
 If you are thinking about using Surfly or are a new user, you can follow this step by step example to understand how Surfly can be integrated and customised. The major steps and changes are illustrated by an image/gif and, for each modification, you can find the link to the corresponding commit.
-In particular, we decided to highlight the main features that we offer and show you how you can make Surfly as visible or invisible as you wish depending on your needs and preferences.
+In this post, we decided to highlight the main features on offer and show you how you can make Surfly as visible or invisible as you wish depending on your needs and preferences.
 
 #### Cake shop website
 
-We decided to build an example website to illustrate the changes that can be made and the variety of ways in which Surfly can be integrated into a website. We chose to design a website for a cake shop which makes personalized cakes and put emphasis on helping their clients and guiding them through their website.
+We decided to build an example website to illustrate the changes that can be made and the variety of ways in which Surfly can be integrated into a website. We chose to design a website for a cake shop which makes personalized cakes and pride themselves on their customer service. The co-browsing feature Surfly provides is therefore an ideal addition to their website, as it can dramatically improve online communication. 
 Here is a screenshot of the home page before we integrate Surfly:
 
 ![website](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s1.png)
 
 As you can see, it is a standard website with different pages and possible actions. The source code can be found [here](https://github.com/MathildeJ/Cake_shop_example/commit/4cbf4486ecc3e93a442a46488588698466891dbb).
-We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
+We are now going to integrate Surfly to this website and use its functionality according to our needs and to our customers' needs.
 
 
 #### Integrate Surfly 
