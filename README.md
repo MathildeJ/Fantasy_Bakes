@@ -7,7 +7,7 @@ In particular, we decided to highlight the main features that we offer and show 
 #### Cake shop website
 We decided to build an example website to illustrate the changes that can be made and the variety of ways in which Surfly can be integrated into a website. We chose to design a website for a cake shop which makes personalized cakes and put emphasis on helping their clients and guiding them through the website.
 Here are a few screenshots of the website before we integrate Surfly:
-
+![website](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s1.png)
 
 As you can see, it is a standard website with different pages and possible actions. We would now like to add Surfly to this website so that we can use the co-browsing functionality it provides.
 
@@ -28,6 +28,7 @@ var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src
 You should also specify the domain name of your website so that you can accept requests made from it.
 
 As you can see below, a red button appeared and allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
+![Surfly widget](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s2.png)
 
 
 #### Widget options
@@ -40,6 +41,7 @@ theme_font_background: "#87cefa", // change color of button
 videochat: false // remove videochat feature (not needed)
 ```
 On the image below, you can now see that the button and the chat box are in our website's theme color. We also chose to disable the video chat feature that is included by default because we have no use for it. Finally, we decided to make the drawings permanent to facilitate communication.
+![widget options 1](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s4.png) ![widget options 2](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s5.png)
 You can find an extensive list of widget options [here](https://www.surfly.com/cobrowsing-api/).
 
 
@@ -54,6 +56,8 @@ Then, we simply need to add the #surflystart anchor to our custom button (get_he
 <a href="#surflystart"> <button class="button" id="get_help_button"></button></a>
 ```
 For instance, we have chosen to use the image of a cake as a get help button for our customers:
+![custom button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s6.png)
+
 
 #### Build your own landing page
 You might have noticed that when a visitor wishes to start a session they are put in a queue and, by default, have to wait for an agent to take the call to be able to navigate within the session. We would like our customer to be aware that they are in the queue (a red banner automatically displays this information) but also for a session to start automatically on our own customised page.
@@ -103,7 +107,7 @@ Finally, we need to display the Queue ID on the landing page when a session star
 	request.send();
 </script>
 ```
-
+![landing page](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s7.png)
 
 As you can see above, we now have our own personalised landing page to greet our customers.
 
@@ -119,6 +123,7 @@ To enable field masking (the follower will not see the leader's input), we can s
 ```
 In our example, we will use this option on the three last fields of our order form as they contain information about the client's card.
 
+![field masking](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s8.png)
 
 As for the 'Order' button, we can easily add an eventListener in order to catch the 'surflycontrolchange' event which is fired every time the control is switched within a Surfly session. Then, we check whether or not the leader is in control and disable the order button if they are not.
 ```
@@ -144,7 +149,7 @@ end_of_session_popup_url: "https://example.com/survey",
 ```
 Please note: you might need to set the 'hidden' option to 'false' for this option to work correctly
 
-
+![survey](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s9.png)
 
 
 #### Receipt
@@ -283,6 +288,8 @@ Once we've store the session ID, we can use a second request which will use this
   }
   </script>
 ```
+![exit button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s10.png)
+
 Please note: considering how our website is built, there is a unique get help button which means that our customers can only start a session from the home page (by clicking a button which redirects them to the landing page). However, stealth mode is activated by default on all the pages containing the Surfly widget and allows to start session instantly by pressing Ctrl + Enter.
 
 ##### Integrate an already existing chat solution
