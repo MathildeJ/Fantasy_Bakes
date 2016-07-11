@@ -1,11 +1,13 @@
 # Blog post draft
 
-Surfly's co-browsing technology enables you to share your browser with others. You can start a Surfly session simply by entering the url of the website you want to browse into the 'start session' panel on your admin page and then invite people to join you by sharing the session url with them. This is the easiest and quickest way to co-browse and does not require any configuration. 
+Surfly's co-browsing technology enables you to share your browser with others. You can start a Surfly session by entering the url of the website you want to browse into the 'start session' panel on your admin page and then invite people to join you by sharing the session url with them. This is the easiest and quickest way to co-browse and does not require any configuration. 
 
-However, if you wish to use Surfly as a feature on your own website, you can also add a Surfly button to your website. By doing this, you will be able to fully customise your session and use as much, or as little, of Surfly's functionality within your own product.
+However, if you wish to use Surfly as a feature on your own website, you can also add a Surfly button to your website. Simply adding this button already allows you to start co-browsing, and Surfly works without any alterations. If required, small additions to the code allow you to fully customise your session and to use as much, or as little, of Surfly's functionality within your own product. 
 
-If you are thinking about using Surfly or are a new user, you can follow our step by step guide as we integrate Surfly into our example application. The major steps and changes are illustrated by an image/gif and, for each modification, you can find the link to the corresponding commit.
+If you are thinking about using Surfly, or are a new user, follow our step by step guide as we integrate Surfly into our example application. The major steps and changes are illustrated by an image/gif and, for each modification, you can refer to our repository, where you will find a corresponding commit.
 In this post, we decided to highlight the main features on offer and show you how you can make Surfly as visible or invisible as you wish depending on your needs and preferences.
+
+For further reference, please see [the repository](https://github.com/MathildeJ/Cake_shop_example) containing the code for our example website and the commits made during integration. 
 
  - [Cake shop website](#website)
  - [Integrate Surfly](#integrate)
@@ -30,13 +32,13 @@ Here is a screenshot of the home page before we integrate Surfly:
 
 ![website](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s1.png)
 
-As you can see, it is a standard website with different pages and possible actions. The source code can be found [here](https://github.com/MathildeJ/Cake_shop_example/commit/4cbf4486ecc3e93a442a46488588698466891dbb).
+As you can see, it is a standard website with different pages and possible actions. 
 We are now going to integrate Surfly into our website, selecting the aspects of Surfly's functionality that best suit our needs.
 
 <a name="integrate"></a>
 #### Integrate Surfly 
 
-The first step is to add the Surfly code snippet to your website's source code. This is easily achieved by logging in to your surfly.com account and navigating to the 'Settings' panel. In the 'Integration' tab, you can find the snippet code that you need to copy and paste into the source code of your website.
+First, add the Surfly code snippet to your website's source code. To do this, log into your surfly.com account and navigate to the 'Settings' panel. In the 'Integration' tab, you can find the snippet code that you need to copy and paste into the source code of your website.
 It should look something like the following:
 ```
 <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
@@ -47,8 +49,8 @@ add your custom options here
 };
 var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src="https://surfly.com/static/js/widget.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n); })();</script>
 ```
-See the commit [here](https://github.com/MathildeJ/Cake_shop_example/commit/a96e10a421c3204701704bcd35466a59393cce5c).
-You should also specify the domain name of your website so that you can accept requests made from it.
+
+You should also specify the domain name of your website in the integrations panel so that you can accept requests made from it.
 
 
 As you can see below, after adding the widget code to our website, we see a red "get live help" button.  This button is shown when an agent is logged in, and, when clicked, allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
@@ -62,7 +64,7 @@ When a client clicks on the red "get live help" button, the client is queue'd un
 <a name="widget"></a>
 #### Widget options
 
-The default red Surfly aesthetic doesn't match our website design, so we would prefer to use our own theme color. This can be easily achieved by setting a few options in the Surfly widget code.
+The default red Surfly button doesn't match our website design, so we'd prefer to use our own theme color. You can do this by setting a few options in the Surfly widget code.
 In our case, we simply used a few [custom options](https://github.com/MathildeJ/Cake_shop_example/commit/7a516bf17b0fdc8c8f66324070266a8469923ecd):
 ```
 drawing_mode: "permanent", // change drawing mode so that the drawings last
@@ -70,22 +72,22 @@ chat_box_color: "#87cefa", // change color of chat box so that it suits our webs
 theme_font_background: "#87cefa", // change color of button 
 videochat: false // remove videochat feature (not needed)
 ```
-In the images below, you can now see that the button and the chat box are in our website's theme color. We also chose to disable the video chat feature that is included by default, as we felt that it was not required. Finally, we decided to make the drawings permanent to facilitate communication.
+In the images below, you can see that the button and the chat box are now in our website's theme color. We also chose to disable the video chat feature that is included by default, as we felt that it was not required. Finally, we decided to make the drawings permanent to facilitate communication.
 
 ![widget options 1](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s4.png) ![widget options 2](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s5.png)
 
-You can find an extensive list of widget options [here](https://www.surfly.com/cobrowsing-api/).
+The API has an [extensive list of widget options](https://www.surfly.com/cobrowsing-api/).
 
 <a name="start_button"></a>
 #### Create your own button
 
-Even though Surfly is now customised to our needs and preferences, we would like to create our own button to start a co-browsing session so that we can customise it and control its behaviour more easily.
+Even though Surfly is now customised to our needs and preferences, we'd like to create our own button to start a co-browsing session so that we can customise it and control its behaviour more easily.
 
-First, we have to hide the default button since we will use our own. To do so, we simply set the 'hidden' option to 'true':
+First, we need to hide the default button, as we will be using our own. To do this, set the 'hidden' option to 'true':
 ```
 hidden: true, // hide Surfly's default button
 ```
-Then, we simply need to add the #surflystart anchor to our custom button (get_help_button in our example):
+Then, we add the #surflystart anchor to our custom button (get_help_button in our example):
 ```
 <a href="#surflystart"> <button class="button" id="get_help_button"></button></a>
 ```
@@ -97,17 +99,17 @@ Click [here](https://github.com/MathildeJ/Cake_shop_example/commit/77349a573223f
 <a name="landing"></a>
 #### Build your own landing page
 
-You might have noticed that when a visitor initiates a session they are put into a queue and, by default, have to wait for an agent to take the call before they can navigate within the session. The screen is blocked, and a red banner appears at the top of the screen with their queue pin. In our example application, the page that the user starts a session from is the home page, and consequently, this is the page that gets blocked. We would prefer to have our own custom landing page, where we can tell our customers that they are in the queue, and that an agent will be with them soon. 
+When a visitor initiates a session they are queue'd and, by default, have to wait for an agent to take the call before they can navigate within the session. The screen is blocked, and a red banner appears at the top of the screen with their queue pin. In our example application, the page that the user starts a session from is the home page, and consequently, this is the page that gets blocked. We would prefer to have our own custom landing page, where we can tell our customers that they are in the queue, and that an agent will be with them soon. 
 
-In order to use such a page, we first need to remove the red banner blocking the session:
+In order to use such a page, we first remove the red banner blocking the session:
 ```
 block_until_agent_joins: false, // remove red banner
 ```
-Once [this](https://github.com/MathildeJ/Cake_shop_example/commit/80d85997b86a20803bd3bfb3cc4287f458dfb8a6) is done, we have to move the snippet code to our landing page (since it will be the page from which sessions start) and add the auto start option so that a session will start automatically (as soon as the user is redirected to our landing page):
+Nect, we move the snippet code to our landing page (since it will be the page from which sessions start) and add the auto start option so that a session will start automatically (as soon as the user is redirected to our landing page):
 ```
 auto_start: true, // session will start automatically
 ```
-We already have our own button which starts a Surfly session on the home page but we now want this button to redirect the user to the landing page. We simply replace the #surflystart anchor with an onclick function that does just that:
+We now want our button to redirect the user to the landing page. We simply replace the #surflystart anchor with an onclick function that does just that:
 ```
 <button class="button" id="get_help_button" onclick="landing()"></button>
 
@@ -120,7 +122,7 @@ We already have our own button which starts a Surfly session on the home page bu
     }
 </script>
 ```
-Finally, we want to display the Queue ID on the landing page when a session starts. This is so that the customer is aware that they are in the queue and, in some cases, so that they can communicate the id to an agent that they were already in contact with (over the phone for example). The agent will then be able to find the customer on the queue page, and join their session. To do this, we use the REST API to get information about the session, keeping the data we are interested in (more information on how to use the REST API can be found [here](https://www.surfly.com/cobrowsing-api/)):
+Finally, we want to display the Queue ID on the landing page when a session starts. This is so that the customer is aware that they are in the queue and, in some cases, so that they can communicate the id to an agent that they were already in contact with (over the phone for example). The agent will then be able to find the customer on the queue page, and join their session. To do this, we use the REST API to get information about the session, and extract the queue ID from this information (more information on how to use the REST API can be found [here](https://www.surfly.com/cobrowsing-api/)):
 ```
 <script>
  	// using the REST API to get information about the session
@@ -146,7 +148,7 @@ Finally, we want to display the Queue ID on the landing page when a session star
 ```
 ![landing page](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s7.png)
 
-As you can see above, we now have our own personalised landing page to greet our customers. You can see the changes [here](https://github.com/MathildeJ/Cake_shop_example/commit/5610cedd114a2e41d1db48426298043cc181df42).
+We now have our own personalised landing page to greet our customers. [View the code changes here](https://github.com/MathildeJ/Cake_shop_example/commit/5610cedd114a2e41d1db48426298043cc181df42).
 
 <a name="session"></a>
 #### Session behaviour
