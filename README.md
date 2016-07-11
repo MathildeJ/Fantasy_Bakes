@@ -19,6 +19,7 @@ In this post, we decided to highlight the main features on offer and show you ho
  - [Queue metadata](#metadata)
  - [Create your own exit button](#exit_button)
  - [Integrate an already existing chat solution](#chat)
+ - [Add a discrete button](#small_button)
 
 
 <a name="website"></a>
@@ -371,9 +372,10 @@ Finally, we would also like to be able to continue chatting with our clients in 
 You will probably [notice](https://github.com/MathildeJ/Cake_shop_example/commit/79613e5d43a34f4317a7b3dcfdcf24ddc8c9f199) that we added a condition in the beginning of the script to make sure that a second Zopim chat window is not opened when a Surfly session starts.
 
 
+<a name="small_button"></a>
 ##### Adding a discrete button 
 
-Adding Zoopim to our website has made text chat the primary method of communication. Therefore, we no longer want our customers to start a Surfly session themselves, but rather that an agent directs them to one.  We decided to remove the landing page, and to add a smaller icon to the footer of our webpage. Then, during the Zoopim chat, if necessary, the agent can direct the user to start a session by clicking on the small cake icon. 
+Adding Zopim to our website has made text chat the primary method of communication. Therefore, we no longer want our customers to start a Surfly session themselves, but rather that an agent directs them to one.  We decided to remove the landing page, and to add a smaller icon to the footer of our webpage. If necessary, the agent can direct the user to start a session by clicking on the small cake icon. 
 
 ![cake icon](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/cake_icon.png)
 
@@ -392,7 +394,7 @@ We then retrieve the session id and display it to the user.
         if(window.__surfly){
         // first check if a session has started (meaning that the icon has been clicked on)
             var request = new XMLHttpRequest();
-	    request.open('GET', 'https://api.surfly.com/v2/sessions/?api_key=ec006650588b4726ac397ab5e56c033a&active_session=true');
+	    request.open('GET', 'https://api.surfly.com/v2/sessions/?api_key=**your api key**&active_session=true');
             request.onreadystatechange = function () {
 	        if (this.readyState === 4) {
 		    var body = this.responseText; 
@@ -410,6 +412,6 @@ We then retrieve the session id and display it to the user.
         };
 ```
 
-The user tells the agent this id, and the agent can use this to identify the correct customer in the queue. The co-browsing session will start, and they can continue talking via zoopim. 
+The user tells the agent this ID, and the agent can use this to identify the correct customer in the queue. The co-browsing session will start, and they can continue talking via Zopim. 
 
-[Retrieved session id](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/session_id_number.png)
+![Retrieved session id](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/session_id_number.png)
