@@ -199,6 +199,10 @@ Please note: you might need to set the 'hidden' option to 'false' for this optio
 ![survey](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s9.png)
 
 
+#### Advanced options
+
+We still would like to make some small adjustments so that our website better suits our needs and the needs of our clients.
+
 <a name="receipt"></a>
 #### Session continuation
 
@@ -233,10 +237,6 @@ In the gif below, you can see that the order details are available even if the s
 
 ![receipt](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/receipt.gif)
 
-
-#### Advanced options
-
-We still would like to make some small adjustments so that our website better suits our needs and the needs of our clients.
 
 <a name="blacklist"></a>
 ##### Blacklisting
