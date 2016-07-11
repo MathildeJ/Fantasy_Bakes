@@ -1,7 +1,9 @@
 # Blog post draft
 
-If you are thinking about using Surfly or are a new user, you can follow our step by step guide as we integrate Surfly into  our example application. The major steps and changes are illustrated by an image/gif and, for each modification, you can find the link to the corresponding commit.
-In this post, we decided to highlight the main features on offer and show you how you can make Surfly as visible or invisible as you wish depending on your needs and preferences.
+#### A step by step guide
+
+If you are thinking about using Surfly or are a new user, you can follow our step by step guide as we integrate Surfly into  our example application. The guide can be used as a template for your own application, and you can pick and chose the features you require. The major steps and changes are illustrated by an image/gif and, for each modification, you can find the link to the corresponding commit.
+In this post, we decided to highlight the main features on offer and show you how you can make Surfly as visible or invisible as you wish depending on your needs and preferences. For a full list of features and possibilities, please see our API [here](https://www.surfly.com/cobrowsing-api/).
 
 #### Cake shop website
 
