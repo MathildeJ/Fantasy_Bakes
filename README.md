@@ -153,7 +153,7 @@ We now have our own personalised landing page to greet our customers. [View the 
 <a name="session"></a>
 #### Session behaviour
 
-We have quickly integrated Surfly in such a way that suits our needs, but there are other use cases that we still haven't covered. In particular, when a client places an order during a session, we don't want the agent to be able to see their payment details or to click the 'Order' button for them. 
+We have integrated Surfly to our satisfaction, but there are other use cases that we still haven't covered. In particular, when a client places an order during a session, we don't want the agent to be able to see their payment details or to click the 'Order' button for them. 
 You can do this by using some of the built-in options provided with Surfly.
 
 To enable field masking (the follower will not see the leader's input), add the 'surfly_private' attribute to fields containing sensitive information:
@@ -198,7 +198,7 @@ Please note: you might need to set the 'hidden' option to 'false' for this optio
 <a name="receipt"></a>
 #### Session continuation
 
-Finally, we'd like to be able to show the customer their receipt. Therefore, we have to make sure that their order information will be passed on, even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
+Finally, we want to show the customer their receipt. Therefore, we have to make sure that their order information will be passed on, even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
 
 We need to add the snippet code to all the pages we wish to transfer cookies from. We also have to set two cookie options to ensure session continuation (including on the landing page): 
 ``` javascript
@@ -232,7 +232,7 @@ In the gif below, you can see that the order details are available even if the s
 
 #### Advanced options
 
-Even though we were able to customise the integration of Surfly, we still would like to make small adjustments so that our website better suits our needs and the needs of our clients.
+We still would like to make some small adjustments so that our website better suits our needs and the needs of our clients.
 
 <a name="blacklist"></a>
 ##### Blacklisting
@@ -249,9 +249,9 @@ We also decided to specify an optional redirect link so that we can design our o
     if (window.location.hash == "#restricted"){
     	window.location.href = '/restricted';
     }
-</script>  
+</script>
 ```
-In our example, we simply decided to redirect the user to our custom restricted page which informs them that this page is restricted:
+In our example, we decided to redirect the user to our custom restricted page which informs them that this page is restricted:
 
 ![blacklist](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/blacklist.gif)
 
@@ -304,7 +304,7 @@ Considering that it's an exit button, we don't want it to be shown when the cust
    }
 </script>
 ```
-Finally, we have to define the action triggered by the button, in this case, ending a Surfly session. To do so, we can once again use the REST API. The first request allows us to retrieve the session ID (which we store so that it's accessible from all the pages):
+Finally, we define the action triggered by the button, in this case, ending a Surfly session. To do so, we can once again use the REST API. The first request allows us to retrieve the session ID (which we store so that it's accessible from all the pages):
 ``` javascript
 <script>
 // get session ID
@@ -370,7 +370,7 @@ Finally, we'd also like to be able to continue chatting with our clients in a Su
 </script>
 <!--End of Zopim Live Chat Script-->
 ```
-You will probably notice that we added a condition in the beginning of the script to make sure that a second Zopim chat window doesn't open when a Surfly session starts.
+We added a condition in the beginning of the script to make sure that a second Zopim chat window doesn't open when a Surfly session starts.
 
 
 <a name="small_button"></a>
