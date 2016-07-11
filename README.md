@@ -93,7 +93,7 @@ Then, we add the #surflystart anchor to our custom button (get_help_button in ou
 ```
 In particular, we have chosen to use the image of a cake as a get help button for our customers:
 
-![custom button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s6.png)
+![custom button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s6-zoomc.png)
 Click [here](https://github.com/MathildeJ/Cake_shop_example/commit/77349a573223f45ca65f66cc1ee1d0983241ace5) to see the commit.
 
 <a name="landing"></a>
