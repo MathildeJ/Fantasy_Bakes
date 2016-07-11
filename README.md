@@ -31,7 +31,7 @@ See the commit [here](https://github.com/MathildeJ/Cake_shop_example/commit/a96e
 You should also specify the domain name of your website so that you can accept requests made from it.
 
 
-As you can see below, after adding the widget code to our website, we see a red "get live help button".  This button is shown when an agent is logged in, and, when clicked, allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
+As you can see below, after adding the widget code to our website, we see a red "get live help" button.  This button is shown when an agent is logged in, and, when clicked, allows us to start a session. Surfly works straight away: we can instantly start a session and receive calls without any further configuration required. 
 
 ![Surfly widget](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s2.png)
 
@@ -167,6 +167,7 @@ We use the 'end_of_session_popup_url' option to point to the url of our survey p
 end_of_session_popup_url: "https://example.com/survey",
 ```
 You can find the commit [here](https://github.com/MathildeJ/Cake_shop_example/commit/4c6b4776f1199a4a8b063bc63f82220736610757).
+
 Please note: you might need to set the 'hidden' option to 'false' for this option to work correctly
 
 ![survey](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s9.png)
@@ -174,7 +175,7 @@ Please note: you might need to set the 'hidden' option to 'false' for this optio
 
 #### Receipt
 
-Finally, we would like to be able to show the customer their receipt. Therefore, we have to make sure that this information will be passed on even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
+Finally, we would like to be able to show the customer their receipt. Therefore, we have to make sure that their order information will be passed on even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
 
 The first thing we need to do is add the snippet code to all the pages we wish to transfer cookies from. We also have to set two cookie options to ensure session continuation (including on the landing page): 
 ```
@@ -267,7 +268,7 @@ Firstly, we have to make sure that the page we are adding the button to contains
 ```
 <button class="button" id="exit_button" style="visibility:hidden" onclick="exitSession()">Exit session</button>
 ```
-Considering that it is an exit button, we do not want it to be shown when the customer is not in a session.  We can easily make sure that the exit button is visible only when there is an on-going Surfly session (and, therefore, we can also control the behaviour of the get help button on the home page):
+Considering that it is an exit button, we do not want it to be shown when the customer is not in a session.  We can easily make sure that the exit button is visible only when there is an on-going Surfly session (in a similar manner, we can also control the behaviour of the get help button on the home page):
 ```
 <script>
    if(window.__surfly){
@@ -279,7 +280,7 @@ Considering that it is an exit button, we do not want it to be shown when the cu
    }
 </script>
 ```
-Finally, we have to define the action triggered by the button, in this case, ending a Surfly session. To do so, we can once again use the REST API. The first request allows us to retrieve the session ID:
+Finally, we have to define the action triggered by the button, in this case, ending a Surfly session. To do so, we can once again use the REST API. The first request allows us to retrieve the session ID (which we store so that it is accessible from all the pages):
 ```
 <script>
 // get session ID
@@ -325,7 +326,7 @@ Once we've stored the session ID, we can use a second request which will use thi
 To see the corresponding commit, click [here](https://github.com/MathildeJ/Cake_shop_example/commit/21c8a2b69093d1dd0649a13951964bfa586a3e1b).
 ![exit button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s10.png)
 
-Please note: considering how our website is built, there is a unique get help button which means that our customers can only start a session from the home page (by clicking a button which redirects them to the landing page). However, stealth mode is activated by default on all the pages containing the Surfly widget and allows to start a session instantly by pressing Ctrl + Enter. Stealth mode can also be disabled, if you prefer.
+Please note: considering how our website is built, there is a unique "get help" button which means that our customers can only start a session from the home page (by clicking a button which redirects them to the landing page). However, stealth mode is activated by default on all the pages containing the Surfly widget and allows to start a session instantly by pressing Ctrl + Enter. Stealth mode can also be disabled, if you prefer.
 
 
 ##### Integrate an already existing chat solution
