@@ -1,11 +1,11 @@
 # Blog post draft
 
-If you are thinking about using Surfly or are a new user, you can follow our step by step example as we integrate Surfly into  our example application. The major steps and changes are illustrated by an image/gif and, for each modification, you can find the link to the corresponding commit.
+If you are thinking about using Surfly or are a new user, you can follow our step by step guide as we integrate Surfly into  our example application. The major steps and changes are illustrated by an image/gif and, for each modification, you can find the link to the corresponding commit.
 In this post, we decided to highlight the main features on offer and show you how you can make Surfly as visible or invisible as you wish depending on your needs and preferences.
 
 #### Cake shop website
 
-Our example application features a bespoke cake shop, specialising in personalized cakes. The shop prides themselves on their customer service, therefore the co-browsing feature Surfly provides is an ideal addition to their website, as it can dramatically improve online communication. 
+Our example application features a bespoke cake shop, specialising in personalized cakes. The shop prides themselves on their customer service, meaning that the co-browsing feature Surfly provides is an ideal addition to their website, as it can dramatically improve online communication. 
 Here is a screenshot of the home page before we integrate Surfly:
 
 ![website](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s1.png)
@@ -16,7 +16,7 @@ We are now going to integrate Surfly into our website, selecting the aspects of 
 
 #### Integrate Surfly 
 
-The first step is adding Surfly to your website's source code. This is easily achieved by logging in to your surfly.com account and navigating to the 'Settings' panel. In the 'Integration' tab, you can find the snippet code that you need to copy and paste into the source code of your website.
+The first step is to add the Surfly code snippet to your website's source code. This is easily achieved by logging in to your surfly.com account and navigating to the 'Settings' panel. In the 'Integration' tab, you can find the snippet code that you need to copy and paste into the source code of your website.
 It should look something like the following:
 ```
 <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
@@ -175,9 +175,9 @@ Please note: you might need to set the 'hidden' option to 'false' for this optio
 
 #### Receipt
 
-Finally, we would like to be able to show the customer their receipt. Therefore, we have to make sure that their order information will be passed on even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
+Finally, we would like to be able to show the customer their receipt. Therefore, we have to make sure that their order information will be passed on, even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
 
-The first thing we need to do is add the snippet code to all the pages we wish to transfer cookies from. We also have to set two cookie options to ensure session continuation (including on the landing page): 
+We need to add the snippet code to all the pages we wish to transfer cookies from. We also have to set two cookie options to ensure session continuation (including on the landing page): 
 ```
 <script type="text/javascript">(function(){window['_surfly_settings']=window['_surfly_settings']||{
 widgetkey:"**your api key**",
