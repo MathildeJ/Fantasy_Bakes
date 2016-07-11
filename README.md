@@ -131,6 +131,11 @@ Finally, we want to display the Queue ID on the landing page when a session star
 As you can see above, we now have our own personalised landing page to greet our customers. You can see the changes [here](https://github.com/MathildeJ/Cake_shop_example/commit/5610cedd114a2e41d1db48426298043cc181df42).
 
 
+#### A discrete addition
+
+A close alternative to creating your own landing page is adding a small button to your webpage. When clicked, this button will start a session, and reveal the session ID to the user. This ID can be communicated to the agent, who can find the user in the queue, and ensure that they are joining the correct session. 
+
+
 #### Session behaviour
 
 We have quickly and easily integrated Surfly in such a way that suits our needs, but there are other use cases that we still haven't covered. In particular, when a client places an order during a session, we do not want the agent to be able to see their payment details or to click the 'Order' button for them. 
@@ -348,3 +353,47 @@ Finally, we would also like to be able to continue chatting with our clients in 
 <!--End of Zopim Live Chat Script-->
 ```
 You will probably [notice](https://github.com/MathildeJ/Cake_shop_example/commit/79613e5d43a34f4317a7b3dcfdcf24ddc8c9f199) that we added a condition in the beginning of the script to make sure that a second Zopim chat window is not opened when a Surfly session starts.
+
+
+##### Adding a discrete button 
+
+Adding Zoopim to our website has made text chat the primary method of communication. Therefore, we no longer want our customers to start a Surfly session themselves, but rather that an agent directs them to one.  We decided to remove the landing page, and to add a smaller icon to the footer of our webpage. Then, during the Zoopim chat, if necessary, the agent can direct the user to start a session by clicking on the small cake icon. 
+
+![cake icon](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/cake_icon.png)
+
+As you can see from the code below, by adding the #surflystart anchor, we ensure that a Surfly session starts when this icon is clicked.
+
+``` javascript
+
+<p id="idP"><a href="#surflystart"><img src="../static/cakeicon.png" id="showId"></a></p>
+
+```
+
+We then retrieve the session id and display it to the user. 
+
+
+``` javascript
+        if(window.__surfly){
+        // first check if a session has started (meaning that the icon has been clicked on)
+            var request = new XMLHttpRequest();
+	    request.open('GET', 'https://api.surfly.com/v2/sessions/?api_key=ec006650588b4726ac397ab5e56c033a&active_session=true');
+            request.onreadystatechange = function () {
+	        if (this.readyState === 4) {
+		    var body = this.responseText; 
+		    // we extract the queue_id from the string we get from the request
+		    var index = body.indexOf("queue_id");
+		    var id = body.substring(index+10, index+14);
+                    // we hide the cake icon
+                    document.getElementById("showId").style.visibility='hidden';  
+                    var textId = document.createTextNode(id);
+                    // replace the cake icon with the session id number
+                    document.getElementById("idP").appendChild(textId);
+	        } 
+       	    }
+	 request.send();
+        };
+```
+
+The user tells the agent this id, and the agent can use this to identify the correct customer in the queue. The co-browsing session will start, and they can continue talking via zoopim. 
+
+[Retrieved session id](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/session_id_number.png)
