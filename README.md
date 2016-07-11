@@ -1,10 +1,27 @@
 # Blog post draft
 
-#### A step by step guide
+Surfly's co-browsing technology enables you to share your browser with others. You can start a Surfly session simply by entering the url of the website you want to browse into the 'start session' panel on your admin page and then invite people to join you by sharing the session url with them. This is the easiest and quickest way to co-browse and does not require any configuration. 
 
-If you are thinking about using Surfly or are a new user, you can follow our step by step guide as we integrate Surfly into  our example application. The guide can be used as a template for your own application, and you can pick and chose the features you require. The major steps and changes are illustrated by an image/gif and, for each modification, you can find the link to the corresponding commit.
-In this post, we decided to highlight the main features on offer and show you how you can make Surfly as visible or invisible as you wish depending on your needs and preferences. For a full list of features and possibilities, please see our API [here](https://www.surfly.com/cobrowsing-api/).
+However, if you wish to use Surfly as a feature on your own website, you can also add a Surfly button to your website. By doing this, you will be able to fully customise your session and use as much, or as little, of Surfly's functionality within your own product.
 
+If you are thinking about using Surfly or are a new user, you can follow our step by step guide as we integrate Surfly into our example application. The major steps and changes are illustrated by an image/gif and, for each modification, you can find the link to the corresponding commit.
+In this post, we decided to highlight the main features on offer and show you how you can make Surfly as visible or invisible as you wish depending on your needs and preferences.
+
+ - [Cake shop website](#website)
+ - [Integrate Surfly](#integrate)
+ - [Widget options](#widget)
+ - [Create your own start button](#start_button)
+ - [Build your own landing page](#landing)
+ - [Session behaviour](#session)
+ - [End of session popup](#popup)
+ - [Session continuation](#receipt)
+ - [Blacklisting](#blacklist)
+ - [Queue metadata](#metadata)
+ - [Create your own exit button](#exit_button)
+ - [Integrate an already existing chat solution](#chat)
+
+
+<a name="website"></a>
 #### Cake shop website
 
 Our example application features a bespoke cake shop, specialising in personalized cakes. The shop prides themselves on their customer service, meaning that the co-browsing feature Surfly provides is an ideal addition to their website, as it can dramatically improve online communication. 
@@ -15,7 +32,7 @@ Here is a screenshot of the home page before we integrate Surfly:
 As you can see, it is a standard website with different pages and possible actions. The source code can be found [here](https://github.com/MathildeJ/Cake_shop_example/commit/4cbf4486ecc3e93a442a46488588698466891dbb).
 We are now going to integrate Surfly into our website, selecting the aspects of Surfly's functionality that best suit our needs.
 
-
+<a name="integrate"></a>
 #### Integrate Surfly 
 
 The first step is to add the Surfly code snippet to your website's source code. This is easily achieved by logging in to your surfly.com account and navigating to the 'Settings' panel. In the 'Integration' tab, you can find the snippet code that you need to copy and paste into the source code of your website.
@@ -41,7 +58,7 @@ When a client clicks on the red "get live help" button, the client is queue'd un
 
 ![user queue'd](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s3.png)
 
-
+<a name="widget"></a>
 #### Widget options
 
 The default red Surfly aesthetic doesn't match our website design, so we would prefer to use our own theme color. This can be easily achieved by setting a few options in the Surfly widget code.
@@ -58,7 +75,7 @@ In the images below, you can now see that the button and the chat box are in our
 
 You can find an extensive list of widget options [here](https://www.surfly.com/cobrowsing-api/).
 
-
+<a name="start_button"></a>
 #### Create your own button
 
 Even though Surfly is now customised to our needs and preferences, we would like to create our own button to start a co-browsing session so that we can customise it and control its behaviour more easily.
@@ -76,7 +93,7 @@ In particular, we have chosen to use the image of a cake as a get help button fo
 ![custom button](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s6.png)
 Click [here](https://github.com/MathildeJ/Cake_shop_example/commit/77349a573223f45ca65f66cc1ee1d0983241ace5) to see the commit.
 
-
+<a name="landing"></a>
 #### Build your own landing page
 
 You might have noticed that when a visitor initiates a session they are put into a queue and, by default, have to wait for an agent to take the call before they can navigate within the session. The screen is blocked, and a red banner appears at the top of the screen with their queue pin. In our example application, the page that the user starts a session from is the home page, and consequently, this is the page that gets blocked. We would prefer to have our own custom landing page, where we can tell our customers that they are in the queue, and that an agent will be with them soon. 
@@ -130,12 +147,7 @@ Finally, we want to display the Queue ID on the landing page when a session star
 
 As you can see above, we now have our own personalised landing page to greet our customers. You can see the changes [here](https://github.com/MathildeJ/Cake_shop_example/commit/5610cedd114a2e41d1db48426298043cc181df42).
 
-
-#### A discrete addition
-
-A close alternative to creating your own landing page is adding a small button to your webpage. When clicked, this button will start a session, and reveal the session ID to the user. This ID can be communicated to the agent, who can find the user in the queue, and ensure that they are joining the correct session. 
-
-
+<a name="session"></a>
 #### Session behaviour
 
 We have quickly and easily integrated Surfly in such a way that suits our needs, but there are other use cases that we still haven't covered. In particular, when a client places an order during a session, we do not want the agent to be able to see their payment details or to click the 'Order' button for them. 
@@ -165,8 +177,8 @@ window.addEventListener('surflycontrolchange', function (event) {
 </script>
 ```
 
-
-#### Ask for feedback
+<a name="popup"></a>
+#### End of session popup
 
 Since customer service is very important to us, we would also like to be able to ask for feedback at the end of a session so that we can improve our website and offer the smoothest co-browsing experience to our clients.
 We use the 'end_of_session_popup_url' option to point to the url of our survey page:
@@ -180,7 +192,8 @@ Please note: you might need to set the 'hidden' option to 'false' for this optio
 ![survey](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/s9.png)
 
 
-#### Receipt
+<a name="receipt"></a>
+#### Session continuation
 
 Finally, we would like to be able to show the customer their receipt. Therefore, we have to make sure that their order information will be passed on, even if the client ends the session before getting their receipt. In order to do so, we can use soft session continuation.
 
@@ -220,6 +233,7 @@ Follow the changes in the code [here](https://github.com/MathildeJ/Cake_shop_exa
 
 Even though we were able to customise the integration of Surfly, we still would like to make small adjustments so that our website better suits our needs and the needs of our clients.
 
+<a name="blacklist"></a>
 ##### Blacklisting
 
 We quickly realised that visitors shouldn't be allowed to access our baking shop page while they are in a Surfly session as it is a separate activity, and the agents working for our cake shop are not necessarily qualified to guide our customers through our baking shop.
@@ -240,7 +254,7 @@ We also decided to specify an optional redirect link so that we can design our o
 
 ![blacklist](https://github.com/MathildeJ/Fantasy_Bakes/blob/master/static/blacklist.gif)
 
-
+<a name="metadata"></a>
 ##### Queue metadata
 
 We would like to be able to give our repeat customers a more personal experience. More specifically, we want to retrieve their login details and pass them on as metadata in the queue so that, for instance, our agents can greet them by name.
@@ -266,7 +280,8 @@ ui_off: true, // make Surfly invisible
 ```
 
 
-##### Exit button
+<a name="exit_button"></a>
+##### Create your own exit button
 
 We already have our own start button and landing page, but now that we have removed the UI, we can't exit a session or use the chat. It's up to us to choose which functionality we want to add to our website and customise the way it will look.
 
@@ -336,6 +351,7 @@ To see the corresponding commit, click [here](https://github.com/MathildeJ/Cake_
 Please note: considering how our website is built, there is a unique "get help" button which means that our customers can only start a session from the home page (by clicking a button which redirects them to the landing page). However, stealth mode is activated by default on all the pages containing the Surfly widget and allows to start a session instantly by pressing Ctrl + Enter. Stealth mode can also be disabled, if you prefer.
 
 
+<a name="chat"></a>
 ##### Integrate an already existing chat solution
 
 Finally, we would also like to be able to continue chatting with our clients in a Surfly session. In our application, we were using Zoopim prior to integrating Surfly. We can simply add the Zopim snippet code to all the pages of our website and we will be able to communicate with our clients inside and outside of a Surfly session without any disturbance when we enter/exit one:
