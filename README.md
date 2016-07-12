@@ -9,6 +9,8 @@ In this post, we decided to highlight the main features on offer and show you ho
 
 For further reference, please see [the repository](https://github.com/MathildeJ/Cake_shop_example) containing the code for our example website and the commits made during integration. 
 
+**please note** if you wish to integrate Surfly, you need to give Surfly access to the server. This is especially important when you are developing locally. 
+
  - [Cake shop website](#website)
  - [Integrate Surfly](#integrate)
  - [Widget options](#widget)
