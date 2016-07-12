@@ -89,11 +89,11 @@ The API has an [extensive list of widget options](https://www.surfly.com/cobrows
 Even though Surfly is now customised to our needs and preferences, we'd like to create our own button to start a co-browsing session so that we can customise it and control its behaviour more easily.
 
 First, we need to hide the default button, as we'll be using our own. To do this, set the 'hidden' option to 'true':
-```
+``` javascript
 hidden: true, // hide Surfly's default button
 ```
 Then, we add the #surflystart anchor to our custom button (get_help_button in our example):
-```
+``` javascript
 <a href="#surflystart"> <button class="button" id="get_help_button"></button></a>
 ```
 In particular, we have chosen to use the image of a cake as a get help button for our customers:
@@ -107,15 +107,15 @@ In particular, we have chosen to use the image of a cake as a get help button fo
 When a visitor initiates a session they are queue'd and, by default, have to wait for an agent to take the call before they can navigate within the session. The screen is blocked, and a red banner appears at the top of the screen with their queue pin. In our example application, the page that the user starts a session from is the home page, and consequently, this is the page that gets blocked. We would prefer to have our own custom landing page, where we can tell our customers that they are in the queue, and that an agent will be with them soon. 
 
 In order to use such a page, we first remove the red banner blocking the session:
-```
+``` javascript
 block_until_agent_joins: false, // remove red banner
 ```
 Next, we move the snippet code to our landing page (since it will be the page from which sessions start) and add the auto start option so that a session will start automatically (as soon as the user is redirected to our landing page):
-```
+``` javascript
 auto_start: true, // session will start automatically
 ```
 We now want our button to redirect the user to the landing page. We simply replace the #surflystart anchor with an onclick function that does just that:
-```
+``` javascript
 <button class="button" id="get_help_button" onclick="landing()"></button>
 
 <script>
